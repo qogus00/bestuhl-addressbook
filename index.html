@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Bestuhl Addressbook</title>
+
+<!-- Add to Home Screen / App-like behavior -->
+<meta name="theme-color" content="#10192e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Bestuhl">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&amp;display=swap">
+<style>
+:root{
+  --navy:#10192e;
+  --navy2:#1b2540;
+  --paper:#faf8f4;
+  --ink:#1c2333;
+  --sub:#6b7182;
+  --line:#e6e2d8;
+  --accent:#ff5a36;
+  --accent-dim:#ffe4da;
+  --mono: 'Noto Sans KR', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+  --sans: 'Noto Sans KR', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:var(--sans);}
+
+.topbar{
+  background:linear-gradient(180deg,var(--navy),var(--navy2));
+  color:#f4f2ec;
+  padding:22px 20px 26px;
+  position:sticky;
+  top:0;
+  z-index:20;
+  box-shadow:0 8px 24px -12px rgba(16,25,46,.55);
+}
+.topbar h1{
+  margin:0 0 2px;
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:.2px;
+}
+.topbar p.tag{
+  margin:0 0 16px;
+  font-size:12.5px;
+  color:#b9bfd1;
+}
+.search-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#0b1223;
+  border:1px solid #2a3555;
+  border-radius:14px;
+  padding:4px 4px 4px 14px;
+  max-width:640px;
+}
+.search-wrap svg{flex:0 0 auto;opacity:.55;}
+#q{
+  flex:1;
+  background:transparent;
+  border:none;
+  outline:none;
+  color:#fbfaf7;
+  font-family:var(--mono);
+  font-size:22px;
+  letter-spacing:.5px;
+  padding:14px 4px;
+  min-width:0;
+}
+#q::placeholder{color:#7c85a0;font-family:var(--sans);letter-spacing:0;font-size:15.5px;}
+#clearBtn{
+  background:#212c4a;
+  color:#c7cde0;
+  border:none;
+  border-radius:10px;
+  width:40px;height:40px;
+  font-size:18px;
+  cursor:pointer;
+  flex:0 0 auto;
+  display:flex;align-items:center;justify-content:center;
+}
+#clearBtn:hover{background:#2c3a60;}
+.hint-row{
+  display:flex;gap:8px;flex-wrap:wrap;
+  margin-top:10px;
+}
+.hint{
+  font-size:13px;
+  color:#9aa2ba;
+  background:#171f38;
+  border:1px solid #2a3555;
+  padding:5px 10px;
+  border-radius:100px;
+}
+.hint b{color:#ffb199;font-weight:700;}
+
+main{max-width:760px;margin:0 auto;padding:18px 16px 60px;}
+
+.status-line{
+  font-size:14px;
+  color:var(--sub);
+  margin:2px 4px 14px;
+}
+.status-line b{color:var(--ink);}
+
+.card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:16px 16px;
+  margin-bottom:12px;
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+.card.facility{background:#fff9f2;border-color:#f0dcc3;}
+.avatar{
+  flex:0 0 auto;
+  width:46px;height:46px;
+  border-radius:12px;
+  background:var(--navy);
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:700;
+  letter-spacing:0;
+}
+.card.facility .avatar{background:#c97a3f;}
+.card.vacant .avatar{background:#b7bcc9;}
+.info{flex:1;min-width:0;}
+.info .row1{
+  display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
+}
+.name{font-size:19px;font-weight:700;}
+.pos{font-size:14px;color:var(--sub);}
+.meta{
+  font-size:13.5px;color:var(--sub);margin-top:3px;
+  display:flex;gap:6px;flex-wrap:wrap;align-items:center;
+}
+.meta .dot{opacity:.5;}
+.badge{
+  display:inline-block;
+  font-size:12.5px;
+  padding:2px 8px;
+  border-radius:100px;
+  background:#eef0f5;
+  color:#454e63;
+}
+.nums{
+  flex:0 0 auto;
+  text-align:right;
+  font-family:var(--mono);
+  font-size:15px;
+  line-height:1.8;
+  color:var(--ink);
+  min-width:135px;
+}
+.nums .lbl{color:var(--sub);font-family:var(--sans);font-size:11.5px;margin-right:4px;}
+.nums .hit{
+  background:var(--accent-dim);
+  color:#c73e1d;
+  font-weight:700;
+  border-radius:5px;
+  padding:0 3px;
+}
+.nums div{padding:4px 0;}
+a.telnum{
+  color:var(--ink);
+  text-decoration:none;
+  border-bottom:1px dashed #c9cede;
+  padding:2px 0;
+  display:inline-block;
+}
+a.telnum:active{
+  color:var(--accent);
+  border-bottom-color:var(--accent);
+}
+.telnum.disabled{
+  color:var(--sub);
+  border-bottom:1px dashed transparent;
+}
+
+details.site{
+  margin-bottom:14px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  background:#fff;
+}
+details.site summary{
+  list-style:none;
+  cursor:pointer;
+  padding:16px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-weight:700;
+  font-size:17px;
+  background:#f4f1ea;
+}
+details.site summary::-webkit-details-marker{display:none;}
+details.site summary .count{
+  font-weight:400;font-size:13.5px;color:var(--sub);
+}
+details.site summary .arrow{transition:transform .15s ease;color:var(--sub);font-weight:400;}
+details.site[open] summary .arrow{transform:rotate(90deg);}
+.site-addr{
+  padding:8px 16px 0;
+  font-size:13px;
+  color:var(--sub);
+}
+.dept-group{padding:6px 12px 10px;}
+.dept-label{
+  font-size:13px;
+  font-weight:700;
+  color:#8a6b3f;
+  margin:14px 6px 8px;
+}
+.empty{
+  text-align:center;
+  padding:60px 20px;
+  color:var(--sub);
+}
+.empty .big{font-size:40px;margin-bottom:8px;}
+
+footer{
+  text-align:center;
+  font-size:12.5px;
+  color:#b3b7c2;
+  padding:20px 0 40px;
+  line-height:1.8;
+}
+@media (max-width:420px){
+  main{padding:16px 14px 60px;}
+  .nums{min-width:125px;}
+}
+
+/* ===== 관리 도구 (DB 업로드) ===== */
+.admin-only{display:none;}
+body.admin .admin-only{display:inline-block;}
+.lock{max-width:380px;margin:40px auto;background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 20px;text-align:center;}
+.lock h2{margin:6px 0 6px;font-size:18px;} .lock p{color:var(--sub);font-size:13.5px;margin:0 0 14px;line-height:1.6;}
+.lock input{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font-size:16px;text-align:center;}
+.lock button{margin-top:10px;width:100%;padding:12px;border:none;border-radius:10px;background:var(--navy);color:#fff;font-size:15px;font-weight:700;cursor:pointer;}
+.lock .err{margin-top:10px;font-size:13px;min-height:1em;}
+.title-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.title-row h1{margin:0;}
+.admin-bar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.db-info{font-size:11.5px;color:#9aa2ba;margin-right:4px;cursor:help;}
+.abtn{background:#212c4a;color:#e6e9f2;border:1px solid #2f3b62;border-radius:9px;padding:7px 11px;font-size:12.5px;font-family:var(--sans);cursor:pointer;white-space:nowrap;}
+.abtn:hover{background:#2c3a60;}
+.abtn.accent{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700;}
+.abtn.accent:hover{filter:brightness(1.07);}
+.modal-wrap{position:fixed;inset:0;background:rgba(10,15,30,.55);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px;}
+.modal{background:#fff;color:var(--ink);border-radius:16px;width:100%;max-width:560px;max-height:calc(100vh - 32px);display:flex;flex-direction:column;box-shadow:0 20px 60px -20px rgba(0,0,0,.5);}
+.modal-head{display:flex;justify-content:space-between;align-items:center;padding:16px 18px 10px;font-size:16px;}
+.mclose{background:none;border:none;font-size:18px;color:var(--sub);cursor:pointer;}
+.modal-body{padding:4px 18px 8px;overflow:auto;font-size:13.5px;line-height:1.6;}
+.modal-foot{display:flex;justify-content:flex-end;gap:8px;padding:12px 18px 16px;border-top:1px solid var(--line);}
+.mbtn{background:#eef0f5;color:var(--ink);border:none;border-radius:10px;padding:9px 16px;font-size:13.5px;font-family:var(--sans);cursor:pointer;}
+.mbtn.primary{background:var(--navy);color:#fff;font-weight:700;}
+.mbtn:disabled{opacity:.5;cursor:wait;}
+.kv{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
+.kv span{color:var(--sub);min-width:70px;font-size:12.5px;}
+.kv small{color:var(--sub);}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;}
+.chips span{background:#eef0f5;border-radius:100px;padding:2px 9px;font-size:12px;}
+.diff details{border:1px solid var(--line);border-radius:10px;margin:6px 0;padding:6px 10px;}
+.diff summary{cursor:pointer;}
+.diff ul{margin:6px 0 2px;padding-left:18px;max-height:180px;overflow:auto;font-size:12.5px;}
+.note{color:var(--sub);font-size:12.5px;}
+.note code,.status code{background:#f2efe8;border-radius:5px;padding:1px 5px;font-size:11.5px;word-break:break-all;}
+.err{color:#c0392b;} .warn{color:#a0661a;}
+.fl{display:block;font-size:12.5px;font-weight:700;margin:12px 0 4px;}
+.fl small{font-weight:400;color:var(--sub);}
+.modal input[type=text],.modal input[type=password],.modal input[type=number],.modal input[type=file]{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:9px;font-size:13.5px;font-family:var(--sans);background:#fff;}
+.two{display:flex;gap:10px;} .two>div{flex:1;min-width:0;}
+details.more{margin-top:10px;font-size:13px;}
+details.more summary{cursor:pointer;color:#3d4a6e;}
+.status{margin-top:12px;font-size:13px;}
+.status.ok{color:#1e7a46;} .status.err{color:#c0392b;} .status.warn{color:#a0661a;}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--navy);color:#fff;padding:12px 18px;border-radius:12px;font-size:13.5px;opacity:0;transition:all .3s;z-index:120;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);}
+.toast.show{opacity:1;transform:translate(-50%,0);}
+.toast a{color:#ffb199;}
+.title-left{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+.ver{font-size:11.5px;color:#9aa2ba;font-family:var(--mono);letter-spacing:.2px;white-space:nowrap;}
+button,input,select,textarea{font-family:inherit;}
+body{font-variant-numeric:tabular-nums;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="title-row">
+  <div class="title-left"><h1>📇 Bestuhl Addressbook</h1><span class="ver" id="verInfo"></span></div>
+  <div class="admin-bar" id="adminBar">
+    <button class="abtn accent" id="btnInstall" hidden title="이 기기에 앱으로 설치">📲 앱 설치</button>
+    <span class="db-info" id="dbInfo"></span>
+    <button class="abtn admin-only" id="btnUpload" title="주요연락처 엑셀(.xlsx) 파일로 전화번호부 갱신">⬆ DB 업로드</button>
+    <input type="file" id="xlsxInput" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden="">
+  </div>
+  </div>
+  <div class="search-wrap">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    <input id="q" type="text" inputmode="search" autocomplete="off" placeholder="이름 · 내선 4자리 · 휴대폰 뒷자리 4자리 입력">
+    <button id="clearBtn" title="지우기">✕</button>
+  </div>
+  <div class="hint-row">
+    <span class="hint">이름 <b>예: 홍길동</b></span>
+    <span class="hint">내선 4자리 <b>예: 6630</b></span>
+    <span class="hint">휴대폰 뒷자리 <b>예: 3383</b></span>
+  </div>
+</div>
+
+<main id="main"></main>
+
+<footer id="footer"></footer>
+
+<script>
+/* ================================================================
+   Bestuhl Addressbook — 웹앱(PWA) · 암호화 DB · DB 업로드 도구
+   (외부 라이브러리 없이 브라우저 내장 기능만 사용: 오프라인 동작)
+   ================================================================ */
+
+/* ---------- DB 로딩 (data.enc.json, 아래 boot() 참고) ---------- */
+function setDB(db, from){
+  DATA = db; records = db.records; sites = db.sites || {};
+  renderFooter(); renderVersion(); renderDbInfo(); update();
+}
+function renderFooter(){
+  const f = document.getElementById('footer');
+  if(!f) return;
+  const m = DATA.meta || {};
+  f.innerHTML = `베스툴 주요연락처 · ${escapeHtml(m.asOf||'')} 기준 · 총 ${records.length}명/라인<br>내 자리의 시작 베스툴`;
+}
+/* 버전 규칙: v주.부.수정 (예: v1.0.1)
+   - DB 업로드(적용)할 때마다 수정번호 +1 (99 다음은 부번호 +1) */
+const VER_RE = /^(\d{1,2})\.(\d{1,2})\.(\d{1,2})$/;
+function dbVersion(meta){
+  const v = String((meta||{}).version || '');
+  return VER_RE.test(v) ? v : '1.0.0';
+}
+function nextVersion(v){
+  let [a,b,c] = v.match(VER_RE).slice(1).map(Number);
+  c++; if(c > 99){ c = 0; b++; } if(b > 99){ b = 0; a++; }
+  return `${a}.${b}.${c}`;
+}
+function renderVersion(){
+  const el = document.getElementById('verInfo');
+  if(!el) return;
+  el.textContent = `v${dbVersion(DATA.meta)}`;
+}
+function renderDbInfo(){
+  const el = document.getElementById('dbInfo');
+  if(!el) return;
+  const m = DATA.meta || {};
+  el.textContent = `${records.length}건`;
+  el.title = (m.source ? '원본: ' + m.source : '') + (m.savedAt ? '\n갱신: ' + new Date(m.savedAt).toLocaleString('ko-KR') : '');
+}
+
+/* ---------- 공용 바이트 유틸 ---------- */
+const TE = new TextEncoder(), TD = new TextDecoder();
+function concatBytes(list){
+  let n = 0; for(const a of list) n += a.length;
+  const out = new Uint8Array(n); let p = 0;
+  for(const a of list){ out.set(a, p); p += a.length; }
+  return out;
+}
+function b64ToBytes(s){ const bin = atob(s); const u = new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i); return u; }
+function bytesToB64(u){ let s=''; for(let i=0;i<u.length;i+=0x8000) s += String.fromCharCode.apply(null, u.subarray(i,i+0x8000)); return btoa(s); }
+function hex(u){ return Array.from(u, b => b.toString(16).padStart(2,'0')).join('').toUpperCase(); }
+function u16le(n){ return new Uint8Array([n&255,(n>>>8)&255]); }
+function u32le(n){ return new Uint8Array([n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255]); }
+function u64le(n){ const lo = n % 4294967296, hi = Math.floor(n / 4294967296); return concatBytes([u32le(lo), u32le(hi)]); }
+async function sha(alg, u8){ return new Uint8Array(await crypto.subtle.digest(alg, u8)); }
+const CRC_TABLE = (()=>{ const t = new Uint32Array(256); for(let n=0;n<256;n++){ let c=n; for(let k=0;k<8;k++) c = c&1 ? 0xEDB88320^(c>>>1) : c>>>1; t[n]=c>>>0; } return t; })();
+function crc32(u8){ let c = 0xFFFFFFFF; for(let i=0;i<u8.length;i++) c = CRC_TABLE[(c^u8[i])&255]^(c>>>8); return (c^0xFFFFFFFF)>>>0; }
+async function streamBytes(u8, transform){
+  const s = new Blob([u8]).stream().pipeThrough(transform);
+  return new Uint8Array(await new Response(s).arrayBuffer());
+}
+function downloadBlob(data, filename, type){
+  const blob = data instanceof Blob ? data : new Blob([data], {type: type||'application/octet-stream'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 4000);
+}
+
+/* ---------- ZIP 읽기 ---------- */
+function unzipIndex(buf){
+  const u8 = new Uint8Array(buf), dv = new DataView(u8.buffer, u8.byteOffset, u8.byteLength);
+  let eocd = -1;
+  for(let i = u8.length-22; i >= Math.max(0, u8.length-65557); i--){ if(dv.getUint32(i,true) === 0x06054b50){ eocd = i; break; } }
+  if(eocd < 0) throw new Error('엑셀(xlsx) 파일 형식이 아닙니다. (.xls 구형 파일이면 Excel에서 .xlsx로 다시 저장해주세요)');
+  const n = dv.getUint16(eocd+10,true), cdOff = dv.getUint32(eocd+16,true);
+  const files = new Map(); let p = cdOff;
+  for(let k=0;k<n;k++){
+    if(dv.getUint32(p,true) !== 0x02014b50) throw new Error('손상된 xlsx 파일입니다.');
+    const method = dv.getUint16(p+10,true), csize = dv.getUint32(p+20,true);
+    const nl = dv.getUint16(p+28,true), el = dv.getUint16(p+30,true), cl = dv.getUint16(p+32,true), lho = dv.getUint32(p+42,true);
+    const name = TD.decode(u8.subarray(p+46, p+46+nl));
+    const start = lho + 30 + dv.getUint16(lho+26,true) + dv.getUint16(lho+28,true);
+    files.set(name, {method, data: u8.subarray(start, start+csize)});
+    p += 46 + nl + el + cl;
+  }
+  return files;
+}
+async function zipText(files, name){
+  const f = files.get(name) || files.get(name.replace(/^\//,''));
+  if(!f) return null;
+  let raw;
+  if(f.method === 0) raw = f.data;
+  else if(f.method === 8) raw = await streamBytes(f.data, new DecompressionStream('deflate-raw'));
+  else throw new Error('지원하지 않는 압축 방식입니다.');
+  return TD.decode(raw);
+}
+
+/* ---------- XLSX → 셀 격자 ---------- */
+function xmlDoc(text){ return new DOMParser().parseFromString(text, 'application/xml'); }
+function tags(el, name){ return Array.from(el.getElementsByTagNameNS('*', name)); }
+function colIndex(letters){ let n=0; for(const ch of letters) n = n*26 + (ch.charCodeAt(0)-64); return n; }
+
+async function readWorkbook(buf){
+  const files = unzipIndex(buf);
+  const wbXml = await zipText(files, 'xl/workbook.xml');
+  if(!wbXml) throw new Error('엑셀 통합문서 정보를 찾을 수 없습니다.');
+  const relsXml = await zipText(files, 'xl/_rels/workbook.xml.rels');
+  const rels = {};
+  if(relsXml) for(const r of tags(xmlDoc(relsXml), 'Relationship')) rels[r.getAttribute('Id')] = r.getAttribute('Target');
+  let ss = [];
+  const ssXml = await zipText(files, 'xl/sharedStrings.xml');
+  if(ssXml){
+    ss = tags(xmlDoc(ssXml), 'si').map(si => tags(si,'t').filter(t => !t.parentNode || t.parentNode.localName !== 'rPh').map(t => t.textContent).join(''));
+  }
+  const sheets = [];
+  for(const s of tags(xmlDoc(wbXml), 'sheet')){
+    let rid = null;
+    for(const a of Array.from(s.attributes)) if(a.localName === 'id') rid = a.value;
+    let target = rels[rid] || '';
+    target = target.startsWith('/') ? target.slice(1) : 'xl/' + target.replace(/^\.\//,'');
+    sheets.push({name: s.getAttribute('name'), hidden: (s.getAttribute('state')||'visible') !== 'visible', path: target});
+  }
+  return {files, ss, sheets};
+}
+async function readSheetGrid(wb, sheet){
+  const xml = await zipText(wb.files, sheet.path);
+  if(!xml) return {};
+  const grid = {}; let maxRow = 0, maxCol = 0;
+  for(const row of tags(xmlDoc(xml), 'row')){
+    const rn = +row.getAttribute('r');
+    let autoCol = 0;
+    for(const c of tags(row, 'c')){
+      const ref = c.getAttribute('r');
+      let col;
+      if(ref){ col = colIndex(ref.replace(/[0-9]/g,'')); } else col = autoCol + 1;
+      autoCol = col;
+      const t = c.getAttribute('t');
+      const vEl = tags(c,'v')[0];
+      let v = vEl ? vEl.textContent : null;
+      if(t === 's') v = ss_get(wb.ss, v);
+      else if(t === 'inlineStr') v = tags(c,'t').map(x=>x.textContent).join('');
+      else if(t === 'str' || t === 'e' || t === 'b') v = v;
+      else if(v !== null && v !== '') v = Number(v);
+      if(v === null || v === '') continue;
+      (grid[rn] = grid[rn] || {})[col] = v;
+      if(rn > maxRow) maxRow = rn; if(col > maxCol) maxCol = col;
+    }
+  }
+  grid.maxRow = maxRow; grid.maxCol = maxCol;
+  return grid;
+}
+function ss_get(ss, i){ const s = ss[+i]; return s == null ? '' : s; }
+function excelDate(n){ const d = new Date(Math.round((n - 25569) * 86400000)); return d.toISOString().slice(0,10); }
+
+/* ---------- 주요연락처 시트 해석 ---------- */
+const SITE_RE = /(본사|사업소|지사|공장|사무소|연구소|센터|지점|매장|출장소)$/;
+function cellStr(v){
+  if(v == null) return '';
+  if(typeof v === 'number') return Number.isInteger(v) ? String(v) : String(v);
+  return String(v).replace(/\r/g,'').trim();
+}
+function isDash(x){ return x === '' || x === '-' || x === '–'; }
+function parseContactsGrid(grid, fileName){
+  const warnings = [];
+  // 1) "부서명 | 직급 | 이름" 머리행으로 좌/우 블록 시작 열 찾기
+  const blockCols = new Set();
+  for(let r=1;r<=grid.maxRow;r++){
+    const row = grid[r]; if(!row) continue;
+    for(const c in row){
+      if(cellStr(row[c]) === '부서명' && cellStr(row[+c+1]) === '직급' && cellStr(row[+c+2]) === '이름') blockCols.add(+c);
+    }
+  }
+  if(!blockCols.size) return null;
+  const cols = Array.from(blockCols).sort((a,b)=>a-b);
+  const recordsOut = [], sitesOut = {}, siteOrder = [];
+  for(const c0 of cols){
+    let state = 'idle', site = null, dept = null;
+    for(let r=1;r<=grid.maxRow;r++){
+      const row = grid[r] || {};
+      const cells = [0,1,2,3,4,5].map(i => cellStr(row[c0+i]));
+      const empty = cells.every(x => x === '');
+      if(cells[0] === '부서명' && cells[1] === '직급'){
+        state = site ? 'rec' : 'idle'; dept = null;
+        if(!site) warnings.push(`${r}행: 사업소 이름 없이 머리행이 나와 건너뜀`);
+        continue;
+      }
+      // 사업소 시작 행: "OO사업소 | 주소"
+      const addr = cells.slice(1).find(x => x !== '');
+      if(SITE_RE.test(cells[0]) && addr && /\S+\s+\S+/.test(addr) && addr.length >= 8 && !/^0\d{1,2}-/.test(cells[4]) && !/^01\d-/.test(cells[5])){
+        site = cells[0]; state = 'head'; dept = null;
+        if(!sitesOut[site]){ sitesOut[site] = {}; siteOrder.push(site); }
+        sitesOut[site].address = addr;
+        continue;
+      }
+      if(state === 'head'){
+        const tel = cells.find(x => /tel\s*:/i.test(x));
+        if(tel) sitesOut[site].telfax = tel.trim();
+        continue;
+      }
+      if(state !== 'rec') continue;
+      if(empty){ state = 'idle'; continue; }
+      let [d, pos, name, ext, num, mob] = cells;
+      name = name.replace(/\s+/g,' ');
+      // 공용시설(식당·현장 등): 부서칸만 있고 직급/이름 없음
+      if(d && pos === '' && name === ''){
+        if(!isDash(ext) || !isDash(num)){
+          recordsOut.push({site, dept:null, pos:null, name:d, ext: ext||'-', num: num||'-', mob:null, type:'facility'});
+        }
+        dept = null;
+        continue;
+      }
+      if(d && !/^\[.*\]$/.test(d)) dept = d;
+      const hasNums = !isDash(ext) || !isDash(num) || !isDash(mob);
+      if(isDash(name)){
+        if(!hasNums) continue;
+        name = '(공석)'; pos = '-';
+      }
+      recordsOut.push({site, dept: dept || '기타', pos: pos || '-', name, ext: ext || '-', num: num || '-', mob: mob || '-', type:'person'});
+    }
+  }
+  // 2) 블록 오른쪽 메모 영역의 "OO팀 공석 / 내선 / 번호" → 공석 회선
+  const lastBlockEnd = cols[cols.length-1] + 5;
+  for(let c = lastBlockEnd + 1; c <= grid.maxCol; c++){
+    for(let r=1;r<=grid.maxRow;r++){
+      const t = cellStr((grid[r]||{})[c]);
+      if(!/공석/.test(t)) continue;
+      const label = t.replace(/공석/g,'').trim();
+      const key = label.replace(/\s/g,'');
+      const match = key && recordsOut.find(x => x.dept && x.dept.replace(/\s|\(.*?\)/g,'').indexOf(key) >= 0);
+      let rr = r + 1;
+      while(rr <= grid.maxRow){
+        const ext = cellStr((grid[rr]||{})[c]);
+        if(!/^\d{3,5}$/.test(ext)) break;
+        const num = cellStr((grid[rr]||{})[c+1]) || '-';
+        const dup = recordsOut.some(x => x.ext === ext && x.num === num);
+        if(!dup){
+          let vSite = match ? match.site : null;
+          if(!vSite && num.length >= 8){ // 같은 국번(예: 070-7549)을 쓰는 사업소로 추정
+            const cnt = {}; recordsOut.forEach(x => { if(x.num && x.num.slice(0,8) === num.slice(0,8)) cnt[x.site] = (cnt[x.site]||0) + 1; });
+            vSite = Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a])[0] || null;
+          }
+          recordsOut.push({site: vSite || '기타', dept: match ? match.dept : (label ? label.toUpperCase() + ' (공석 회선)' : '공석 회선'), pos:'-', name:'(공석)', ext, num, mob:'-', type:'person'});
+        }
+        rr++;
+      }
+    }
+  }
+  // 3) 기준일: 상단 6행 안의 날짜, 없으면 파일명(YYMMDD), 없으면 오늘
+  let asOf = null;
+  for(let r=1;r<=Math.min(8,grid.maxRow) && !asOf;r++){
+    for(const c in (grid[r]||{})){
+      const v = grid[r][c];
+      if(typeof v === 'number' && v > 40000 && v < 80000){ asOf = excelDate(v); break; }
+      if(typeof v === 'string' && /^20\d\d[-.\/]\d{1,2}[-.\/]\d{1,2}/.test(v.trim())){
+        const m = v.trim().match(/^(20\d\d)[-.\/](\d{1,2})[-.\/](\d{1,2})/); asOf = `${m[1]}-${m[2].padStart(2,'0')}-${m[3].padStart(2,'0')}`; break;
+      }
+    }
+  }
+  if(!asOf){ const m = (fileName||'').match(/(\d{2})(\d{2})(\d{2})/); if(m) asOf = `20${m[1]}-${m[2]}-${m[3]}`; }
+  if(!asOf) asOf = new Date().toISOString().slice(0,10);
+  // 사업소 순서대로 정렬(원래 순서 유지, 사업소별 묶음)
+  const order = {}; siteOrder.forEach((s,i)=>order[s]=i);
+  const sorted = recordsOut.map((r,i)=>({r,i})).sort((a,b)=>((order[a.r.site] ?? 999) - (order[b.r.site] ?? 999)) || (a.i - b.i)).map(x=>x.r);
+  return {records: sorted, sites: sitesOut, asOf, warnings};
+}
+async function parseContactsXlsx(file){
+  const buf = await file.arrayBuffer();
+  const wb = await readWorkbook(buf);
+  const candidates = wb.sheets.filter(s => !s.hidden).concat(wb.sheets.filter(s => s.hidden));
+  for(const sh of candidates){
+    const grid = await readSheetGrid(wb, sh);
+    const res = parseContactsGrid(grid, file.name);
+    if(res && res.records.length){ res.sheet = sh.name; return res; }
+  }
+  throw new Error('"부서명 · 직급 · 이름 · 내선 · 번호 · 핸드폰 번호" 머리행을 가진 시트를 찾지 못했습니다.');
+}
+
+/* ---------- 변경 내역 비교 ---------- */
+function recKey(r){ return r.type === 'facility' ? `F|${r.site}|${r.name}` : (r.name === '(공석)' ? `V|${r.ext}|${r.num}` : `P|${r.site}|${r.name}`); }
+function diffDB(oldRecs, newRecs){
+  const om = new Map(oldRecs.map(r => [recKey(r), r])), nm = new Map(newRecs.map(r => [recKey(r), r]));
+  const added = [], removed = [], changed = [];
+  for(const [k, r] of nm){
+    const o = om.get(k);
+    if(!o){ added.push(r); continue; }
+    const diffs = [];
+    for(const f of ['dept','pos','ext','num','mob']){
+      if((o[f]||'-') !== (r[f]||'-')) diffs.push({f, from:o[f]||'-', to:r[f]||'-'});
+    }
+    if(diffs.length) changed.push({r, diffs});
+  }
+  for(const [k, r] of om) if(!nm.has(k)) removed.push(r);
+  return {added, removed, changed};
+}
+
+/* ---------- 모달 / 토스트 ---------- */
+function openModal(title, bodyHtml, buttons){
+  closeModal();
+  const wrap = document.createElement('div');
+  wrap.className = 'modal-wrap'; wrap.id = 'modalWrap'; wrap.setAttribute('data-runtime','');
+  wrap.innerHTML = `<div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-head"><b>${escapeHtml(title)}</b><button class="mclose" title="닫기">✕</button></div>
+    <div class="modal-body">${bodyHtml}</div>
+    <div class="modal-foot"></div></div>`;
+  const foot = wrap.querySelector('.modal-foot');
+  for(const b of (buttons||[])){
+    const el = document.createElement('button');
+    el.className = 'mbtn' + (b.primary ? ' primary' : '');
+    el.textContent = b.label; if(b.id) el.id = b.id;
+    el.addEventListener('click', b.onClick);
+    foot.appendChild(el);
+  }
+  wrap.querySelector('.mclose').addEventListener('click', closeModal);
+  wrap.addEventListener('mousedown', e => { if(e.target === wrap) closeModal(); });
+  document.body.appendChild(wrap);
+  return wrap;
+}
+function closeModal(){ const w = document.getElementById('modalWrap'); if(w) w.remove(); }
+function toast(msg, ms){
+  const t = document.createElement('div');
+  t.className = 'toast'; t.setAttribute('data-runtime',''); t.innerHTML = msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.classList.add('show'), 10);
+  setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=>t.remove(), 400); }, ms||3500);
+}
+
+/* ---------- DB 업로드 흐름 ---------- */
+async function onXlsxSelected(file){
+  if(!file) return;
+  let res;
+  try{ res = await parseContactsXlsx(file); }
+  catch(e){ openModal('DB 업로드 실패', `<p class="err">${escapeHtml(e.message||String(e))}</p>`, [{label:'닫기', onClick: closeModal}]); return; }
+  const d = diffDB(records, res.records);
+  const siteCounts = {};
+  res.records.forEach(r => siteCounts[r.site] = (siteCounts[r.site]||0) + 1);
+  const li = r => `<li>${escapeHtml(r.site)} · ${escapeHtml(r.dept||'')} · <b>${escapeHtml(r.name)}</b> ${r.ext&&r.ext!=='-'?'('+escapeHtml(r.ext)+')':''}</li>`;
+  const FL = {dept:'부서', pos:'직급', ext:'내선', num:'번호', mob:'휴대폰'};
+  const body = `
+    <div class="kv"><span>파일</span><b>${escapeHtml(file.name)}</b></div>
+    <div class="kv"><span>시트</span><b>${escapeHtml(res.sheet)}</b></div>
+    <div class="kv"><span>기준일</span><b>${escapeHtml(res.asOf)}</b> <small>(현재 ${escapeHtml((DATA.meta||{}).asOf||'-')})</small></div>
+    <div class="kv"><span>인원/라인</span><b>${res.records.length}건</b> <small>(현재 ${records.length}건)</small></div>
+    <div class="chips">${Object.keys(siteCounts).map(s=>`<span>${escapeHtml(s)} ${siteCounts[s]}</span>`).join('')}</div>
+    <div class="diff">
+      <details ${d.added.length?'open':''}><summary>➕ 추가 <b>${d.added.length}</b></summary><ul>${d.added.map(li).join('')}</ul></details>
+      <details ${d.removed.length?'open':''}><summary>➖ 삭제 <b>${d.removed.length}</b></summary><ul>${d.removed.map(li).join('')}</ul></details>
+      <details><summary>✏️ 변경 <b>${d.changed.length}</b></summary><ul>${d.changed.map(c=>`<li><b>${escapeHtml(c.r.name)}</b> (${escapeHtml(c.r.site)}) — ${c.diffs.map(x=>`${FL[x.f]} ${escapeHtml(x.from)} → <b>${escapeHtml(x.to)}</b>`).join(', ')}</li>`).join('')}</ul></details>
+    </div>
+    ${res.warnings.length?`<p class="warn">${res.warnings.map(escapeHtml).join('<br>')}</p>`:''}
+    <p class="note">[다음]을 누르면 암호화 후 깃허브에 게시합니다. 게시 후 1~2분 뒤 모든 사용자 화면에 반영됩니다.</p>`;
+  openModal('DB 업로드 — 변경 내용 확인', body, [
+    {label:'취소', onClick: closeModal},
+    {label:'다음', primary:true, id:'btnApplyDb', onClick: () => {
+      const db = {meta:{asOf: res.asOf, version: nextVersion(dbVersion(DATA.meta)), source: file.name, sheet: res.sheet, savedAt: new Date().toISOString()}, records: res.records, sites: res.sites};
+      closeModal();
+      openPublishDialog(db);
+    }}
+  ]);
+}
+
+/* ================================================================
+   암호화 DB (data.enc.json) — PBKDF2-SHA256 + AES-256-GCM
+   저장소는 공개이므로 연락처는 암호화된 상태로만 올라갑니다.
+   ================================================================ */
+const DATA_URL = 'data.enc.json';
+const PW_KEY = 'bestuhl_ab_pw';
+const ENC_CACHE_KEY = 'bestuhl_ab_enc';
+const TOKEN_KEY = 'bestuhl_ab_gh_token';
+const ADMIN_KEY = 'bestuhl_ab_admin';
+const KDF_ITER = 300000;
+function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function lsSet(k, v){ try{ if(v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); }catch(e){} }
+
+async function deriveKey(password, salt, iter){
+  const base = await crypto.subtle.importKey('raw', TE.encode(password), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2', hash:'SHA-256', salt, iterations: iter}, base, {name:'AES-GCM', length:256}, false, ['encrypt','decrypt']);
+}
+async function encryptDB(db, password){
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const key = await deriveKey(password, salt, KDF_ITER);
+  const ct = new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM', iv}, key, TE.encode(JSON.stringify(db))));
+  return {format:'bestuhl-ab-enc-1', kdf:'PBKDF2-SHA256', iter:KDF_ITER, salt:bytesToB64(salt), iv:bytesToB64(iv), ct:bytesToB64(ct),
+          asOf:(db.meta||{}).asOf||'', version:(db.meta||{}).version||'', updatedAt:new Date().toISOString()};
+}
+async function decryptDB(enc, password){
+  const key = await deriveKey(password, b64ToBytes(enc.salt), enc.iter || KDF_ITER);
+  let pt;
+  try{ pt = await crypto.subtle.decrypt({name:'AES-GCM', iv:b64ToBytes(enc.iv)}, key, b64ToBytes(enc.ct)); }
+  catch(e){ const er = new Error('BADPW'); er.badpw = true; throw er; }
+  return JSON.parse(TD.decode(pt));
+}
+
+/* ---------- 시작: 암호화 DB 받기 → 복호화 ---------- */
+async function fetchEnc(){
+  try{
+    const r = await fetch(DATA_URL + '?t=' + Date.now(), {cache:'no-store'});
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+    const txt = await r.text();
+    lsSet(ENC_CACHE_KEY, txt);
+    return JSON.parse(txt);
+  }catch(e){
+    const c = lsGet(ENC_CACHE_KEY);       // 오프라인: 마지막으로 받은 데이터 사용
+    if(c) return JSON.parse(c);
+    throw e;
+  }
+}
+let ENC = null;
+async function boot(){
+  const main = document.getElementById('main');
+  main.innerHTML = '<div class="empty"><div class="big">⏳</div>연락처를 불러오는 중…</div>';
+  try{ ENC = await fetchEnc(); }
+  catch(e){
+    if(isAdmin()){ main.innerHTML = '<div class="empty"><div class="big">📂</div>아직 게시된 연락처가 없습니다.<br>[⬆ DB 업로드]로 엑셀 파일을 올려주세요.</div>'; return; }
+    main.innerHTML = '<div class="empty"><div class="big">📡</div>연락처를 불러오지 못했습니다.<br>인터넷 연결을 확인 후 다시 열어주세요.</div>'; return;
+  }
+  const pw = lsGet(PW_KEY);
+  if(pw){
+    try{ const db = await decryptDB(ENC, pw); return unlocked(db); }
+    catch(e){ if(!e.badpw) console.error(e); lsSet(PW_KEY, null); return showLock('비밀번호가 변경되었습니다. 새 비밀번호를 입력해주세요.'); }
+  }
+  showLock();
+}
+function unlocked(db){
+  els.q.disabled = false;
+  setDB(db);
+}
+function showLock(msg){
+  els.q.disabled = true;
+  const main = document.getElementById('main');
+  main.innerHTML = `<form class="lock" id="lockForm" autocomplete="off">
+      <div class="big" style="font-size:36px">🔒</div>
+      <h2>베스툴 임직원 전용</h2>
+      <p>${escapeHtml(msg || '사내 공지된 접속 비밀번호를 입력해주세요.')}<br>이 기기에서는 한 번만 입력하면 됩니다.</p>
+      <input type="password" id="lockPw" placeholder="비밀번호" autocomplete="current-password">
+      <button type="submit" id="lockBtn">열기</button>
+      <div class="err" id="lockErr"></div>
+    </form>`;
+  const form = document.getElementById('lockForm'), inp = document.getElementById('lockPw'), err = document.getElementById('lockErr'), btn = document.getElementById('lockBtn');
+  inp.focus();
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const pw = inp.value;
+    if(!pw) return;
+    btn.disabled = true; btn.textContent = '확인 중…'; err.textContent = '';
+    try{
+      const db = await decryptDB(ENC, pw);
+      lsSet(PW_KEY, pw);
+      unlocked(db);
+    }catch(e2){
+      err.textContent = e2.badpw ? '비밀번호가 올바르지 않습니다.' : ('오류: ' + (e2.message || e2));
+      btn.disabled = false; btn.textContent = '열기'; inp.select();
+    }
+  });
+}
+
+/* ---------- 관리자 모드 (주소 뒤에 ?admin 을 붙여 한 번 열면 이 기기에 기억) ---------- */
+function isAdmin(){
+  const p = new URLSearchParams(location.search);
+  if(p.has('admin')) lsSet(ADMIN_KEY, p.get('admin') === 'off' ? null : '1');
+  return lsGet(ADMIN_KEY) === '1';
+}
+function repoInfo(){
+  const owner = (location.hostname.match(/^([^.]+)\.github\.io$/i) || [])[1] || 'qogus00';
+  const repo = location.pathname.split('/').filter(Boolean)[0] || 'bestuhl-addressbook';
+  return {owner, repo: /\.html?$/.test(repo) ? 'bestuhl-addressbook' : repo};
+}
+
+/* ---------- 엑셀 → 암호화 → 깃허브 게시 ---------- */
+function openPublishDialog(db){
+  const {owner, repo} = repoInfo();
+  const savedPw = lsGet(PW_KEY) || '';
+  const savedToken = lsGet(TOKEN_KEY) || '';
+  const body = `
+    <div class="kv"><span>기준일</span><b>${escapeHtml(db.meta.asOf)}</b> <small>· ${db.records.length}건 · v${escapeHtml(db.meta.version)}</small></div>
+    <label class="fl">접속 비밀번호 <small>(직원들이 입력하는 비밀번호 — 바꾸면 모든 기기에서 새로 입력해야 함)</small></label>
+    <input type="text" id="pubPw" value="${escapeHtml(savedPw)}" autocomplete="off">
+    <label class="fl">깃허브 토큰 <small>(${escapeHtml(owner)}/${escapeHtml(repo)} 저장소 Contents 쓰기 권한 · 이 기기에만 저장)</small></label>
+    <input type="password" id="pubToken" value="${escapeHtml(savedToken)}" placeholder="github_pat_… (비워두면 파일 다운로드 방식)" autocomplete="off">
+    <details class="more"><summary>토큰 없이 게시하는 방법</summary>
+      <p class="note">토큰을 비워두고 [게시]를 누르면 <code>data.enc.json</code> 파일이 내려받아집니다. 이어서 열리는 깃허브 업로드 화면에 그 파일을 끌어다 놓고 <b>Commit changes</b>를 누르면 됩니다.</p>
+    </details>
+    <div id="pubStatus" class="status"></div>`;
+  openModal('암호화 후 게시', body, [
+    {label:'취소', onClick: closeModal},
+    {label:'게시', primary:true, id:'btnPublish', onClick: () => doPublish(db)}
+  ]);
+}
+function pubStatus(html, cls){ const s = document.getElementById('pubStatus'); if(s){ s.className = 'status ' + (cls||''); s.innerHTML = html; } }
+async function doPublish(db){
+  const {owner, repo} = repoInfo();
+  const pw = document.getElementById('pubPw').value.trim();
+  const token = document.getElementById('pubToken').value.trim();
+  if(pw.length < 6){ pubStatus('비밀번호는 6자 이상으로 해주세요.', 'err'); return; }
+  const btn = document.getElementById('btnPublish'); btn.disabled = true;
+  try{
+    pubStatus('⏳ 암호화 중…');
+    const enc = await encryptDB(db, pw);
+    const json = JSON.stringify(enc, null, 1) + '\n';
+    if(!token){
+      downloadBlob(new Blob([json], {type:'application/json'}), 'data.enc.json');
+      window.open(`https://github.com/${owner}/${repo}/upload/main`, '_blank');
+      pubStatus('📥 <b>data.enc.json</b>을 내려받았습니다. 새 탭의 깃허브 업로드 화면에 끌어다 놓고 <b>Commit changes</b>를 눌러주세요.', 'warn');
+    }else{
+      pubStatus('⏳ 깃허브에 게시 중…');
+      const api = `https://api.github.com/repos/${owner}/${repo}/contents/${DATA_URL}`;
+      const H = {'Authorization':'Bearer ' + token, 'Accept':'application/vnd.github+json'};
+      let sha;
+      const g = await fetch(api, {headers:H, cache:'no-store'});
+      if(g.ok) sha = (await g.json()).sha; else if(g.status !== 404) throw new Error('토큰 확인 실패 (HTTP ' + g.status + ')');
+      const p = await fetch(api, {method:'PUT', headers:H, body: JSON.stringify({
+        message: `연락처 갱신 ${db.meta.asOf} (v${db.meta.version}, ${db.records.length}건)`,
+        content: btoa(json), sha})});
+      if(!p.ok){ const t = await p.text(); throw new Error('게시 실패 (HTTP ' + p.status + ') ' + t.slice(0,200)); }
+      lsSet(TOKEN_KEY, token);
+      pubStatus('✅ 게시 완료. 1~2분 뒤 모든 사용자에게 반영됩니다.', 'ok');
+    }
+    lsSet(PW_KEY, pw);
+    ENC = enc;
+    els.q.value = '';
+    unlocked(db);
+    btn.textContent = '닫기'; btn.disabled = false; btn.onclick = closeModal;
+  }catch(e){
+    console.error(e); pubStatus('❌ ' + escapeHtml(e.message || String(e)), 'err'); btn.disabled = false;
+  }
+}
+
+/* ---------- 앱 설치 (PWA) ---------- */
+let deferredInstall = null;
+function setupInstall(){
+  const btn = document.getElementById('btnInstall');
+  const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(e => console.warn('SW', e));
+  if(standalone || !btn) return;
+  window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredInstall = e; btn.hidden = false; });
+  window.addEventListener('appinstalled', () => { btn.hidden = true; deferredInstall = null; toast('✅ 앱이 설치되었습니다. 홈 화면에서 실행하세요.', 4000); });
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  if(ios) btn.hidden = false;
+  btn.addEventListener('click', async () => {
+    if(deferredInstall){ deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; btn.hidden = true; }
+    else if(ios) openModal('홈 화면에 추가', '<p>Safari 아래쪽 <b>공유 버튼(□↑)</b> → <b>홈 화면에 추가</b>를 누르세요.</p>', [{label:'확인', primary:true, onClick: closeModal}]);
+    else openModal('앱 설치', '<p>크롬 주소창 오른쪽의 <b>설치 아이콘</b> 또는 메뉴(⋮) → <b>앱 설치 / 홈 화면에 추가</b>를 누르세요.</p>', [{label:'확인', primary:true, onClick: closeModal}]);
+  });
+}
+
+/* ---------- 초기화 ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+  if(isAdmin()) document.body.classList.add('admin');
+  setupInstall();
+  const input = document.getElementById('xlsxInput');
+  document.getElementById('btnUpload').addEventListener('click', () => { input.value = ''; input.click(); });
+  input.addEventListener('change', () => onXlsxSelected(input.files[0]));
+  // 엑셀 파일을 화면에 끌어다 놓아도 업로드
+  document.addEventListener('dragover', e => { e.preventDefault(); });
+  document.addEventListener('drop', e => {
+    e.preventDefault();
+    const f = e.dataTransfer && e.dataTransfer.files[0];
+    if(f && /\.xlsx$/i.test(f.name) && isAdmin()) onXlsxSelected(f);
+  });
+});
+</script>
+<script>
+let DATA = {meta:{}, records:[], sites:{}};
+let records = DATA.records;
+let sites = DATA.sites || {};
+
+const els = {
+  q: document.getElementById('q'),
+  clearBtn: document.getElementById('clearBtn'),
+  main: document.getElementById('main'),
+};
+
+function onlyDigits(s){ return (s||'').toString().replace(/[^0-9]/g,''); }
+
+function escapeHtml(s){
+  return (s==null?'':String(s)).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function highlightDigits(full, query){
+  // full: display string with dashes, query: digits only
+  if(!query) return escapeHtml(full);
+  const digits = onlyDigits(full);
+  if(!digits.includes(query)) return escapeHtml(full);
+  // find where the digit-match starts within the raw string, by walking through
+  let dIdx = digits.indexOf(query);
+  let matchStart = -1, matchEnd = -1;
+  let dCount = 0;
+  for(let i=0;i<full.length;i++){
+    if(/[0-9]/.test(full[i])){
+      if(dCount === dIdx) matchStart = i;
+      dCount++;
+      if(dCount === dIdx + query.length){ matchEnd = i+1; break; }
+    }
+  }
+  if(matchStart===-1) return escapeHtml(full);
+  if(matchEnd===-1) matchEnd = full.length;
+  return escapeHtml(full.slice(0,matchStart)) + '<span class="hit">' + escapeHtml(full.slice(matchStart,matchEnd)) + '</span>' + escapeHtml(full.slice(matchEnd));
+}
+
+function initials(name){
+  if(!name) return '?';
+  if(name === '(공석)') return '−';
+  return name.trim().slice(-2);
+}
+
+function extractTel(telfax){
+  if(!telfax) return null;
+  const m = telfax.match(/tel\s*:\s*([0-9\-]+)/i);
+  return m ? onlyDigits(m[1]) : null;
+}
+
+function personCard(r, digitsQuery){
+  const isVacant = r.name === '(공석)';
+  const cls = r.type === 'facility' ? 'facility' : (isVacant ? 'vacant' : '');
+  const posLine = [r.dept, r.pos].filter(Boolean).join(' · ');
+
+  const hasExt = r.ext && r.ext !== '-';
+  const hasNum = r.num && r.num !== '-';
+  const hasMob = r.mob && r.mob !== '-';
+
+  const mainTelDigits = extractTel(sites[r.site] ? sites[r.site].telfax : null);
+  const extHref = (hasExt && mainTelDigits) ? `tel:${mainTelDigits},,${onlyDigits(String(r.ext))}` : null;
+  const numHref = hasNum ? `tel:${onlyDigits(r.num)}` : null;
+  const mobHref = hasMob ? `tel:${onlyDigits(r.mob)}` : null;
+
+  function numRow(label, hasVal, val, href){
+    if(!hasVal) return '';
+    const inner = highlightDigits(String(val), digitsQuery);
+    const body = href
+      ? `<a class="telnum" href="${href}">${inner}</a>`
+      : `<span class="telnum disabled">${inner}</span>`;
+    return `<div><span class="lbl">${label}</span>${body}</div>`;
+  }
+
+  return `
+  <div class="card ${cls}">
+    <div class="avatar">${escapeHtml(initials(r.name))}</div>
+    <div class="info">
+      <div class="row1">
+        <span class="name">${escapeHtml(r.name)}</span>
+        ${r.pos && r.pos!=='-' ? `<span class="pos">${escapeHtml(r.pos)}</span>` : ''}
+      </div>
+      <div class="meta">
+        ${r.site ? `<span class="badge">${escapeHtml(r.site)}</span>` : ''}
+        ${r.dept ? `<span>${escapeHtml(r.dept)}</span>` : ''}
+      </div>
+    </div>
+    <div class="nums">
+      ${numRow('내선', hasExt, r.ext, extHref)}
+      ${numRow('유선', hasNum, r.num, numHref)}
+      ${numRow('휴대폰', hasMob, r.mob, mobHref)}
+    </div>
+  </div>`;
+}
+
+function matchScore(r, rawQuery, digitsQuery){
+  let m = false;
+  if(rawQuery){
+    if(r.name && r.name.includes(rawQuery)) m = true;
+    if(r.dept && r.dept.includes(rawQuery)) m = true;
+    if(r.site && r.site.includes(rawQuery)) m = true;
+  }
+  if(digitsQuery){
+    const extD = onlyDigits(r.ext);
+    const numD = onlyDigits(r.num);
+    const mobD = onlyDigits(r.mob);
+    if(extD && (extD === digitsQuery || extD.endsWith(digitsQuery))) m = true;
+    if(digitsQuery.length >= 4 && mobD && mobD.endsWith(digitsQuery)) m = true;
+    if(digitsQuery.length >= 4 && numD && numD.endsWith(digitsQuery)) m = true;
+    if(digitsQuery.length >= 6 && numD && numD.includes(digitsQuery)) m = true;
+    if(digitsQuery.length >= 6 && mobD && mobD.includes(digitsQuery)) m = true;
+  }
+  return m;
+}
+
+function renderResults(rawQuery){
+  const digitsQuery = onlyDigits(rawQuery);
+  const matches = records.filter(r => matchScore(r, rawQuery, digitsQuery));
+
+  if(matches.length === 0){
+    els.main.innerHTML = `
+      <div class="empty">
+        <div class="big">🔍</div>
+        <div><b>"${escapeHtml(rawQuery)}"</b>에 해당하는 연락처가 없습니다.</div>
+        <div style="margin-top:6px;font-size:13.5px;">이름 일부, 내선 4자리, 또는 휴대폰 뒷자리 4자리로 다시 검색해보세요.</div>
+      </div>`;
+    return;
+  }
+
+  els.main.innerHTML = `
+    <div class="status-line"><b>${matches.length}건</b> 검색됨</div>
+    ${matches.map(r => personCard(r, digitsQuery)).join('')}
+  `;
+}
+
+function renderDirectory(){
+  // group by site, then dept, preserving original order
+  const order = [];
+  const bySite = {};
+  for(const r of records){
+    const site = r.site || '기타';
+    if(!bySite[site]){ bySite[site] = []; order.push(site); }
+    bySite[site].push(r);
+  }
+
+  let html = `<div class="status-line">전체 <b>${records.length}</b>명/라인 · 사업소를 눌러 펼쳐보세요</div>`;
+
+  for(const site of order){
+    const list = bySite[site];
+    const info = sites[site] || {};
+    const deptOrder = [];
+    const byDept = {};
+    for(const r of list){
+      const dept = r.dept || (r.type==='facility' ? '공용시설' : '기타');
+      if(!byDept[dept]){ byDept[dept] = []; deptOrder.push(dept); }
+      byDept[dept].push(r);
+    }
+    html += `
+    <details class="site">
+      <summary>
+        <span>🏢 ${escapeHtml(site)} <span class="count">(${list.length})</span></span>
+        <span class="arrow">▶</span>
+      </summary>
+      ${info.address ? `<div class="site-addr">📍 ${escapeHtml(info.address)}${info.telfax ? ' · ' + escapeHtml(info.telfax) : ''}</div>` : ''}
+      <div class="dept-group">
+        ${deptOrder.map(dept => `
+          <div class="dept-label">${escapeHtml(dept)}</div>
+          ${byDept[dept].map(r => personCard(r, '')).join('')}
+        `).join('')}
+      </div>
+    </details>`;
+  }
+  els.main.innerHTML = html;
+}
+
+function update(){
+  const raw = els.q.value.trim();
+  if(raw === ''){
+    renderDirectory();
+  } else {
+    renderResults(raw);
+  }
+}
+
+els.q.addEventListener('input', update);
+els.clearBtn.addEventListener('click', () => { els.q.value=''; update(); els.q.focus(); });
+
+boot();
+</script>
+
+
+</body></html>
