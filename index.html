@@ -5,7 +5,7 @@
 <title>Bestuhl Addressbook</title>
 
 <!-- Add to Home Screen / App-like behavior -->
-<meta name="theme-color" content="#f1e8d8">
+<meta name="theme-color" content="#e8f1fb">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -16,7 +16,7 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&amp;display=swap">
 <style>
 :root{
   --navy:#10192e;
@@ -496,23 +496,76 @@ main{max-width:1120px;}
 @media (max-width:330px){ .cards{grid-template-columns:minmax(0,1fr);} }
 button,input,select,textarea{font-family:inherit;}
 body{font-variant-numeric:tabular-nums;}
+/* ===== 색상 테마: Color Hunt 팔레트 6종 (제목 진하게 → 직원 카드 연하게) — v1.2.0 ===== */
+:root{--tone-1:#112D4E;--tone-2:#3F72AF;--tone-3:#DBE2EF;--tone-4:#F9F7F7;--paper:#fdfcfc;--ink:#112d4e;--sub:#6c7e96;--line:#e8ecf5;--accent:#112D4E;--accent-dim:#DBE2EF;--tb-bg:linear-gradient(180deg,#112D4E,#102a49);--tb-ink:#ffffff;--tb-sub:#b3bcc6;--tb-shadow:0 8px 22px -14px #0a1b2f;--logo:#ffffff;--tb-field:#fdfdfd;--tb-field-line:#7c8c9e;--tb-field-ink:#112d4e;--tb-ph:#8896a6;--tb-btn:#324a67;--tb-btn-line:#586c83;--tb-btn-ink:#ffffff;--tb-btn-hover:#455b75;--tb-on:#F9F7F7;--tb-on-ink:#112d4e;--tb-hint-b:#F9F7F7;--acc-btn:#F9F7F7;--acc-btn-line:#F9F7F7;--acc-btn-ink:#112d4e;--sum-bg:#3F72AF;--sum-ink:#ffffff;--sum-sub:#c5d5e7;--s-info:#e2eaf3;--s-info-hover:#ffffff;--s-hover-bg:#345d90;--picto-bg:#fbf9f9;--picto-ink:#112d4e;--site-bg:#eff2f8;--site-line:#e2e8f2;--dept:#2d527e;--chip:#e8ecf5;--chip-ink:#112d4e;--avatar:#DBE2EF;--avatar-ink:#112d4e;--fac-avatar:#9db5d5;--vac-avatar:#e7e6e6;--card:#fcfbfb;--card-line:#e6ebf4;--fac-bg:#fbf9f9;--fac-line:#e2e8f2;--hit-bg:#DBE2EF;--hit-ink:#112d4e;--tel-line:#dfe5f1;--foot:#8896a6;--modal:#ffffff;--field:#ffffff;--note-code:#fbfafa;--navy:#112d4e;--navy2:#112D4E;--toast:#112d4e}
+:root[data-tone="mint"]{--tone-1:#71C9CE;--tone-2:#A6E3E9;--tone-3:#CBF1F5;--tone-4:#E3FDFD;--paper:#f4fefe;--ink:#20383a;--sub:#6d8b8e;--line:#ddf6f8;--accent:#467d80;--accent-dim:#CBF1F5;--tb-bg:linear-gradient(180deg,#71C9CE,#6abdc2);--tb-ink:#20383a;--tb-sub:#3a6669;--tb-shadow:0 8px 22px -14px #44797c;--logo:#20383a;--tb-field:#f7fefe;--tb-field-line:#63b1b5;--tb-field-ink:#20383a;--tb-ph:#909c9c;--tb-btn:#bfe7e9;--tb-btn-line:#63b1b5;--tb-btn-ink:#20383a;--tb-btn-hover:#d4eff0;--tb-on:#55979a;--tb-on-ink:#20383a;--tb-hint-b:#20383a;--acc-btn:#20383a;--acc-btn-line:#20383a;--acc-btn-ink:#ffffff;--sum-bg:#A6E3E9;--sum-ink:#20383a;--sum-sub:#486b6e;--s-info:#345254;--s-info-hover:#20383a;--s-hover-bg:#bceaee;--picto-bg:#ebfefe;--picto-ink:#386467;--site-bg:#e8f9fa;--site-line:#d5f4f7;--dept:#3f5659;--chip:#ddf6f8;--chip-ink:#20383a;--avatar:#CBF1F5;--avatar-ink:#20383a;--fac-avatar:#bcebf0;--vac-avatar:#dae9e9;--card:#f2fefe;--card-line:#dbf5f8;--fac-bg:#ebfefe;--fac-line:#d5f4f7;--hit-bg:#CBF1F5;--hit-ink:#20383a;--tel-line:#d0f2f6;--foot:#909c9c;--modal:#ffffff;--field:#ffffff;--note-code:#eefefe;--navy:#467d80;--navy2:#71C9CE;--toast:#264446}
+:root[data-tone="blue"]{--tone-1:#112D4E;--tone-2:#3F72AF;--tone-3:#DBE2EF;--tone-4:#F9F7F7;--paper:#fdfcfc;--ink:#112d4e;--sub:#6c7e96;--line:#e8ecf5;--accent:#112D4E;--accent-dim:#DBE2EF;--tb-bg:linear-gradient(180deg,#112D4E,#102a49);--tb-ink:#ffffff;--tb-sub:#b3bcc6;--tb-shadow:0 8px 22px -14px #0a1b2f;--logo:#ffffff;--tb-field:#fdfdfd;--tb-field-line:#7c8c9e;--tb-field-ink:#112d4e;--tb-ph:#8896a6;--tb-btn:#324a67;--tb-btn-line:#586c83;--tb-btn-ink:#ffffff;--tb-btn-hover:#455b75;--tb-on:#F9F7F7;--tb-on-ink:#112d4e;--tb-hint-b:#F9F7F7;--acc-btn:#F9F7F7;--acc-btn-line:#F9F7F7;--acc-btn-ink:#112d4e;--sum-bg:#3F72AF;--sum-ink:#ffffff;--sum-sub:#c5d5e7;--s-info:#e2eaf3;--s-info-hover:#ffffff;--s-hover-bg:#345d90;--picto-bg:#fbf9f9;--picto-ink:#112d4e;--site-bg:#eff2f8;--site-line:#e2e8f2;--dept:#2d527e;--chip:#e8ecf5;--chip-ink:#112d4e;--avatar:#DBE2EF;--avatar-ink:#112d4e;--fac-avatar:#9db5d5;--vac-avatar:#e7e6e6;--card:#fcfbfb;--card-line:#e6ebf4;--fac-bg:#fbf9f9;--fac-line:#e2e8f2;--hit-bg:#DBE2EF;--hit-ink:#112d4e;--tel-line:#dfe5f1;--foot:#8896a6;--modal:#ffffff;--field:#ffffff;--note-code:#fbfafa;--navy:#112d4e;--navy2:#112D4E;--toast:#112d4e}
+:root[data-tone="pink"]{--tone-1:#FF9494;--tone-2:#FFD1D1;--tone-3:#FFE3E1;--tone-4:#FFF5E4;--paper:#fffbf4;--ink:#4c2c2c;--sub:#9d7e7d;--line:#ffedec;--accent:#a86262;--accent-dim:#FFE3E1;--tb-bg:linear-gradient(180deg,#FF9494,#f08b8b);--tb-ink:#4c2c2c;--tb-sub:#854d4d;--tb-shadow:0 8px 22px -14px #995959;--logo:#4c2c2c;--tb-field:#fffcf7;--tb-field-line:#e08282;--tb-field-ink:#4c2c2c;--tb-ph:#a69696;--tb-btn:#ffcfcf;--tb-btn-line:#e08282;--tb-btn-ink:#4c2c2c;--tb-btn-hover:#ffdfdf;--tb-on:#bf6f6f;--tb-on-ink:#ffffff;--tb-hint-b:#4c2c2c;--acc-btn:#4c2c2c;--acc-btn-line:#4c2c2c;--acc-btn-ink:#ffffff;--sum-bg:#FFD1D1;--sum-ink:#4c2c2c;--sum-sub:#825e5e;--s-info:#674545;--s-info-hover:#4c2c2c;--s-hover-bg:#ffdcdc;--picto-bg:#fff8ec;--picto-ink:#854d4d;--site-bg:#fff2f2;--site-line:#ffe9e7;--dept:#614f4f;--chip:#ffedec;--chip-ink:#4c2c2c;--avatar:#FFE3E1;--avatar-ink:#4c2c2c;--fac-avatar:#ffdcdb;--vac-avatar:#ebe5da;--card:#fffaf3;--card-line:#ffebea;--fac-bg:#fff8ec;--fac-line:#ffe9e7;--hit-bg:#FFE3E1;--hit-ink:#4c2c2c;--tel-line:#ffe6e4;--foot:#a69696;--modal:#ffffff;--field:#ffffff;--note-code:#fff9ef;--navy:#a35f5f;--navy2:#FF9494;--toast:#5c3535}
+:root[data-tone="slate"]{--tone-1:#27374D;--tone-2:#526D82;--tone-3:#9DB2BF;--tone-4:#DDE6ED;--paper:#f1f5f8;--ink:#27374d;--sub:#5c6e80;--line:#bfcdd5;--accent:#27374D;--accent-dim:#9DB2BF;--tb-bg:linear-gradient(180deg,#27374D,#253448);--tb-ink:#ffffff;--tb-sub:#babfc6;--tb-shadow:0 8px 22px -14px #17212e;--logo:#ffffff;--tb-field:#f5f8fa;--tb-field-line:#88919d;--tb-field-ink:#27374d;--tb-ph:#939ba6;--tb-btn:#455366;--tb-btn-line:#687382;--tb-btn-ink:#ffffff;--tb-btn-hover:#576374;--tb-on:#DDE6ED;--tb-on-ink:#27374d;--tb-hint-b:#DDE6ED;--acc-btn:#DDE6ED;--acc-btn-line:#DDE6ED;--acc-btn-ink:#27374d;--sum-bg:#526D82;--sum-ink:#ffffff;--sum-sub:#cbd3da;--s-info:#e5e9ec;--s-info-hover:#ffffff;--s-hover-bg:#43596b;--picto-bg:#e7eef2;--picto-ink:#27374d;--site-bg:#d3dce2;--site-line:#b1c1cc;--dept:#344653;--chip:#bfcdd5;--chip-ink:#27374d;--avatar:#9DB2BF;--avatar-ink:#27374d;--fac-avatar:#7f96a7;--vac-avatar:#d6dce0;--card:#f0f4f7;--card-line:#bac9d2;--fac-bg:#e7eef2;--fac-line:#b1c1cc;--hit-bg:#9DB2BF;--hit-ink:#27374d;--tel-line:#a7bac5;--foot:#939ba6;--modal:#ffffff;--field:#ffffff;--note-code:#ebf0f4;--navy:#27374d;--navy2:#27374D;--toast:#27374d}
+:root[data-tone="beige"]{--tone-1:#8D7B68;--tone-2:#A4907C;--tone-3:#C8B6A6;--tone-4:#F1DEC9;--paper:#f9f2e9;--ink:#3b342c;--sub:#7a6e63;--line:#dbd0c5;--accent:#8D7B68;--accent-dim:#C8B6A6;--tb-bg:linear-gradient(180deg,#8D7B68,#857462);--tb-ink:#ffffff;--tb-sub:#dbd5cf;--tb-shadow:0 8px 22px -14px #554a3e;--logo:#ffffff;--tb-field:#fbf5ef;--tb-field-line:#c0b6ac;--tb-field-ink:#3b342c;--tb-ph:#9d9a96;--tb-btn:#9d8d7d;--tb-btn-line:#afa395;--tb-btn-ink:#ffffff;--tb-btn-hover:#a69889;--tb-on:#F1DEC9;--tb-on-ink:#3b342c;--tb-hint-b:#F1DEC9;--acc-btn:#F1DEC9;--acc-btn-line:#F1DEC9;--acc-btn-ink:#3b342c;--sum-bg:#A4907C;--sum-ink:#3b342c;--sum-sub:#5a5044;--s-info:#4b4238;--s-info-hover:#3b342c;--s-hover-bg:#bbac9d;--picto-bg:#f5e8d9;--picto-ink:#605447;--site-bg:#e6ded7;--site-line:#d3c5b8;--dept:#4f453c;--chip:#dbd0c5;--chip-ink:#3b342c;--avatar:#C8B6A6;--avatar-ink:#3b342c;--fac-avatar:#baa795;--vac-avatar:#e2d7ca;--card:#f9f0e7;--card-line:#d8ccc1;--fac-bg:#f5e8d9;--fac-line:#d3c5b8;--hit-bg:#C8B6A6;--hit-ink:#3b342c;--tel-line:#cebdaf;--foot:#9d9a96;--modal:#ffffff;--field:#ffffff;--note-code:#f7ebdf;--navy:#827160;--navy2:#8D7B68;--toast:#494036}
+:root[data-tone="green"]{--tone-1:#40513B;--tone-2:#609966;--tone-3:#9DC08B;--tone-4:#EDF1D6;--paper:#f8f9ef;--ink:#2d3929;--sub:#5f7655;--line:#bfd6b4;--accent:#40513B;--accent-dim:#9DC08B;--tb-bg:linear-gradient(180deg,#40513B,#3c4c37);--tb-ink:#ffffff;--tb-sub:#c2c7c0;--tb-shadow:0 8px 22px -14px #263123;--logo:#ffffff;--tb-field:#fafbf3;--tb-field-line:#969f93;--tb-field-ink:#2d3929;--tb-ph:#969c94;--tb-btn:#5b6956;--tb-btn-line:#798576;--tb-btn-ink:#ffffff;--tb-btn-hover:#6a7766;--tb-on:#EDF1D6;--tb-on-ink:#2d3929;--tb-hint-b:#EDF1D6;--acc-btn:#EDF1D6;--acc-btn-line:#EDF1D6;--acc-btn-ink:#2d3929;--sum-bg:#609966;--sum-ink:#2d3929;--sum-sub:#3c563b;--s-info:#354732;--s-info-hover:#2d3929;--s-hover-bg:#88b28c;--picto-bg:#f2f5e2;--picto-ink:#40513b;--site-bg:#d3e3cb;--site-line:#b1cda2;--dept:#304c33;--chip:#bfd6b4;--chip-ink:#2d3929;--avatar:#9DC08B;--avatar-ink:#2d3929;--fac-avatar:#85b07c;--vac-avatar:#e0e2d2;--card:#f7f9ed;--card-line:#bad3ae;--fac-bg:#f2f5e2;--fac-line:#b1cda2;--hit-bg:#9DC08B;--hit-ink:#2d3929;--tel-line:#a7c697;--foot:#969c94;--modal:#ffffff;--field:#ffffff;--note-code:#f4f7e6;--navy:#40513b;--navy2:#40513B;--toast:#374633}
+:root[data-theme="dark"][data-tone="mint"]{--paper:#0a1314;--ink:#f4fefe;--sub:#98adae;--line:#304041;--accent:#CBF1F5;--accent-dim:#436062;--tb-bg:linear-gradient(180deg,#315759,#274547);--tb-ink:#f4fefe;--tb-sub:#a3b9b9;--tb-shadow:0 8px 22px -14px rgba(0,0,0,.7);--logo:#E3FDFD;--tb-field:#0a1212;--tb-field-line:#3d4f51;--tb-field-ink:#f7fefe;--tb-ph:#788b8c;--tb-btn:#2c4e50;--tb-btn-line:#3d4f51;--tb-btn-ink:#f1fefe;--tb-btn-hover:#386366;--tb-on:#E3FDFD;--tb-on-ink:#162729;--tb-hint-b:#E3FDFD;--acc-btn:#CBF1F5;--acc-btn-line:#CBF1F5;--acc-btn-ink:#162729;--sum-bg:#3c5658;--sum-ink:#f4fefe;--sum-sub:#98adae;--s-info:#b8cfd0;--s-info-hover:#ffffff;--s-hover-bg:#527477;--picto-bg:#475a5c;--picto-ink:#E3FDFD;--site-bg:#233537;--site-line:#38494a;--dept:#CBF1F5;--chip:#3d4f51;--chip-ink:#f1fefe;--avatar:#637a7d;--avatar-ink:#ffffff;--fac-avatar:#5a7e82;--vac-avatar:#2c3536;--card:#1d2a2c;--card-line:#344446;--fac-bg:#203133;--fac-line:#3c5658;--hit-bg:#637a7d;--hit-ink:#ffffff;--tel-line:#475a5c;--foot:#6e8080;--modal:#1d2a2c;--field:#0a1212;--note-code:#2a393b;--navy:#CBF1F5;--navy2:#CBF1F5;--toast:#315759;color-scheme:dark}
+@media (prefers-color-scheme: dark){ :root[data-theme="system"][data-tone="mint"]{--paper:#0a1314;--ink:#f4fefe;--sub:#98adae;--line:#304041;--accent:#CBF1F5;--accent-dim:#436062;--tb-bg:linear-gradient(180deg,#315759,#274547);--tb-ink:#f4fefe;--tb-sub:#a3b9b9;--tb-shadow:0 8px 22px -14px rgba(0,0,0,.7);--logo:#E3FDFD;--tb-field:#0a1212;--tb-field-line:#3d4f51;--tb-field-ink:#f7fefe;--tb-ph:#788b8c;--tb-btn:#2c4e50;--tb-btn-line:#3d4f51;--tb-btn-ink:#f1fefe;--tb-btn-hover:#386366;--tb-on:#E3FDFD;--tb-on-ink:#162729;--tb-hint-b:#E3FDFD;--acc-btn:#CBF1F5;--acc-btn-line:#CBF1F5;--acc-btn-ink:#162729;--sum-bg:#3c5658;--sum-ink:#f4fefe;--sum-sub:#98adae;--s-info:#b8cfd0;--s-info-hover:#ffffff;--s-hover-bg:#527477;--picto-bg:#475a5c;--picto-ink:#E3FDFD;--site-bg:#233537;--site-line:#38494a;--dept:#CBF1F5;--chip:#3d4f51;--chip-ink:#f1fefe;--avatar:#637a7d;--avatar-ink:#ffffff;--fac-avatar:#5a7e82;--vac-avatar:#2c3536;--card:#1d2a2c;--card-line:#344446;--fac-bg:#203133;--fac-line:#3c5658;--hit-bg:#637a7d;--hit-ink:#ffffff;--tel-line:#475a5c;--foot:#6e8080;--modal:#1d2a2c;--field:#0a1212;--note-code:#2a393b;--navy:#CBF1F5;--navy2:#CBF1F5;--toast:#315759;color-scheme:dark} }
+:root[data-theme="dark"][data-tone="blue"], :root[data-theme="dark"]:not([data-tone]){--paper:#060f1a;--ink:#fdfcfc;--sub:#a5a8ad;--line:#2e3948;--accent:#DBE2EF;--accent-dim:#1b3554;--tb-bg:linear-gradient(180deg,#0b1d32,#0a1a2e);--tb-ink:#fdfcfc;--tb-sub:#b1b3b7;--tb-shadow:0 8px 22px -14px rgba(0,0,0,.7);--logo:#F9F7F7;--tb-field:#060e18;--tb-field-line:#3d4856;--tb-field-ink:#fdfdfd;--tb-ph:#80868d;--tb-btn:#0b1c30;--tb-btn-line:#3d4856;--tb-btn-ink:#fcfbfb;--tb-btn-hover:#0c1e35;--tb-on:#F9F7F7;--tb-on-ink:#0c1f37;--tb-hint-b:#F9F7F7;--acc-btn:#DBE2EF;--acc-btn-line:#DBE2EF;--acc-btn-ink:#0c1f37;--sum-bg:#18304d;--sum-ink:#fdfcfc;--sum-sub:#a5a8ad;--s-info:#c9cacd;--s-info-hover:#ffffff;--s-hover-bg:#213e62;--picto-bg:#475260;--picto-ink:#F9F7F7;--site-bg:#102137;--site-line:#364150;--dept:#DBE2EF;--chip:#3d4856;--chip-ink:#fcfbfb;--avatar:#67717f;--avatar-ink:#ffffff;--fac-avatar:#244369;--vac-avatar:#28313c;--card:#192433;--card-line:#323d4c;--fac-bg:#0f1f34;--fac-line:#18304d;--hit-bg:#67717f;--hit-ink:#ffffff;--tel-line:#475260;--foot:#747a82;--modal:#192433;--field:#060e18;--note-code:#283342;--navy:#DBE2EF;--navy2:#DBE2EF;--toast:#0b1d32;color-scheme:dark}
+@media (prefers-color-scheme: dark){ :root[data-theme="system"][data-tone="blue"], :root[data-theme="system"]:not([data-tone]){--paper:#060f1a;--ink:#fdfcfc;--sub:#a5a8ad;--line:#2e3948;--accent:#DBE2EF;--accent-dim:#1b3554;--tb-bg:linear-gradient(180deg,#0b1d32,#0a1a2e);--tb-ink:#fdfcfc;--tb-sub:#b1b3b7;--tb-shadow:0 8px 22px -14px rgba(0,0,0,.7);--logo:#F9F7F7;--tb-field:#060e18;--tb-field-line:#3d4856;--tb-field-ink:#fdfdfd;--tb-ph:#80868d;--tb-btn:#0b1c30;--tb-btn-line:#3d4856;--tb-btn-ink:#fcfbfb;--tb-btn-hover:#0c1e35;--tb-on:#F9F7F7;--tb-on-ink:#0c1f37;--tb-hint-b:#F9F7F7;--acc-btn:#DBE2EF;--acc-btn-line:#DBE2EF;--acc-btn-ink:#0c1f37;--sum-bg:#18304d;--sum-ink:#fdfcfc;--sum-sub:#a5a8ad;--s-info:#c9cacd;--s-info-hover:#ffffff;--s-hover-bg:#213e62;--picto-bg:#475260;--picto-ink:#F9F7F7;--site-bg:#102137;--site-line:#364150;--dept:#DBE2EF;--chip:#3d4856;--chip-ink:#fcfbfb;--avatar:#67717f;--avatar-ink:#ffffff;--fac-avatar:#244369;--vac-avatar:#28313c;--card:#192433;--card-line:#323d4c;--fac-bg:#0f1f34;--fac-line:#18304d;--hit-bg:#67717f;--hit-ink:#ffffff;--tel-line:#475260;--foot:#747a82;--modal:#192433;--field:#060e18;--note-code:#283342;--navy:#DBE2EF;--navy2:#DBE2EF;--toast:#0b1d32;color-scheme:dark} }
+:root[data-theme="dark"][data-tone="pink"]{--paper:#1a0f0f;--ink:#fffbf4;--sub:#b2a69b;--line:#4a3939;--accent:#FFE3E1;--accent-dim:#6f5656;--tb-bg:linear-gradient(180deg,#6f4141,#593434);--tb-ink:#fffbf4;--tb-sub:#bdb2a6;--tb-shadow:0 8px 22px -14px rgba(0,0,0,.7);--logo:#FFF5E4;--tb-field:#180e0e;--tb-field-line:#594847;--tb-field-ink:#fffcf7;--tb-ph:#90847c;--tb-btn:#643a3a;--tb-btn-line:#594847;--tb-btn-ink:#fffaf2;--tb-btn-hover:#7f4a4a;--tb-on:#FFF5E4;--tb-on-ink:#351f1f;--tb-hint-b:#FFF5E4;--acc-btn:#FFE3E1;--acc-btn-line:#FFE3E1;--acc-btn-ink:#351f1f;--sum-bg:#644d4d;--sum-ink:#fffbf4;--sum-sub:#b2a69b;--s-info:#d3c8ba;--s-info-hover:#ffffff;--s-hover-bg:#856969;--picto-bg:#645252;--picto-ink:#FFF5E4;--site-bg:#412e2e;--site-line:#534241;--dept:#FFE3E1;--chip:#594847;--chip-ink:#fffaf2;--avatar:#857170;--avatar-ink:#ffffff;--fac-avatar:#907272;--vac-avatar:#3c3131;--card:#342524;--card-line:#4e3d3d;--fac-bg:#3d2b2b;--fac-line:#644d4d;--hit-bg:#857170;--hit-ink:#ffffff;--tel-line:#645252;--foot:#857972;--modal:#342524;--field:#180e0e;--note-code:#433333;--navy:#FFE3E1;--navy2:#FFE3E1;--toast:#6f4141;color-scheme:dark}
+@media (prefers-color-scheme: dark){ :root[data-theme="system"][data-tone="pink"]{--paper:#1a0f0f;--ink:#fffbf4;--sub:#b2a69b;--line:#4a3939;--accent:#FFE3E1;--accent-dim:#6f5656;--tb-bg:linear-gradient(180deg,#6f4141,#593434);--tb-ink:#fffbf4;--tb-sub:#bdb2a6;--tb-shadow:0 8px 22px -14px rgba(0,0,0,.7);--logo:#FFF5E4;--tb-field:#180e0e;--tb-field-line:#594847;--tb-field-ink:#fffcf7;--tb-ph:#90847c;--tb-btn:#643a3a;--tb-btn-line:#594847;--tb-btn-ink:#fffaf2;--tb-btn-hover:#7f4a4a;--tb-on:#FFF5E4;--tb-on-ink:#351f1f;--tb-hint-b:#FFF5E4;--acc-btn:#FFE3E1;--acc-btn-line:#FFE3E1;--acc-btn-ink:#351f1f;--sum-bg:#644d4d;--sum-ink:#fffbf4;--sum-sub:#b2a69b;--s-info:#d3c8ba;--s-info-hover:#ffffff;--s-hover-bg:#856969;--picto-bg:#645252;--picto-ink:#FFF5E4;--site-bg:#412e2e;--site-line:#534241;--dept:#FFE3E1;--chip:#594847;--chip-ink:#fffaf2;--avatar:#857170;--avatar-ink:#ffffff;--fac-avatar:#907272;--vac-avatar:#3c3131;--card:#342524;--card-line:#4e3d3d;--fac-bg:#3d2b2b;--fac-line:#644d4d;--hit-bg:#857170;--hit-ink:#ffffff;--tel-line:#645252;--foot:#857972;--modal:#342524;--field:#180e0e;--note-code:#433333;--navy:#FFE3E1;--navy2:#FFE3E1;--toast:#6f4141;color-scheme:dark} }
+:root[data-theme="dark"][data-tone="slate"]{--paper:#0e131a;--ink:#f1f5f8;--sub:#969ea6;--line:#2b353f;--accent:#9DB2BF;--accent-dim:#283644;--tb-bg:linear-gradient(180deg,#192432,#17202e);--tb-ink:#f1f5f8;--tb-sub:#a0a8b0;--tb-shadow:0 8px 22px -14px rgba(0,0,0,.7);--logo:#DDE6ED;--tb-field:#0d1218;--tb-field-line:#353f4a;--tb-field-ink:#f5f8fa;--tb-ph:#788088;--tb-btn:#182230;--tb-btn-line:#353f4a;--tb-btn-ink:#eef2f6;--tb-btn-hover:#1b2635;--tb-on:#DDE6ED;--tb-on-ink:#1b2636;--tb-hint-b:#DDE6ED;--acc-btn:#9DB2BF;--acc-btn-line:#9DB2BF;--acc-btn-ink:#1b2636;--sum-bg:#253240;--sum-ink:#f1f5f8;--sum-sub:#969ea6;--s-info:#b4bdc5;--s-info-hover:#ffffff;--s-hover-bg:#2f3f4e;--picto-bg:#3c4752;--picto-ink:#DDE6ED;--site-bg:#1b2530;--site-line:#313b45;--dept:#9DB2BF;--chip:#353f4a;--chip-ink:#eef2f6;--avatar:#515e69;--avatar-ink:#ffffff;--fac-avatar:#324352;--vac-avatar:#30353c;--card:#1d252f;--card-line:#2e3842;--fac-bg:#1a232e;--fac-line:#253240;--hit-bg:#515e69;--hit-ink:#ffffff;--tel-line:#3c4752;--foot:#6d757e;--modal:#1d252f;--field:#0d1218;--note-code:#27303a;--navy:#9DB2BF;--navy2:#9DB2BF;--toast:#192432;color-scheme:dark}
+@media (prefers-color-scheme: dark){ :root[data-theme="system"][data-tone="slate"]{--paper:#0e131a;--ink:#f1f5f8;--sub:#969ea6;--line:#2b353f;--accent:#9DB2BF;--accent-dim:#283644;--tb-bg:linear-gradient(180deg,#192432,#17202e);--tb-ink:#f1f5f8;--tb-sub:#a0a8b0;--tb-shadow:0 8px 22px -14px rgba(0,0,0,.7);--logo:#DDE6ED;--tb-field:#0d1218;--tb-field-line:#353f4a;--tb-field-ink:#f5f8fa;--tb-ph:#788088;--tb-btn:#182230;--tb-btn-line:#353f4a;--tb-btn-ink:#eef2f6;--tb-btn-hover:#1b2635;--tb-on:#DDE6ED;--tb-on-ink:#1b2636;--tb-hint-b:#DDE6ED;--acc-btn:#9DB2BF;--acc-btn-line:#9DB2BF;--acc-btn-ink:#1b2636;--sum-bg:#253240;--sum-ink:#f1f5f8;--sum-sub:#969ea6;--s-info:#b4bdc5;--s-info-hover:#ffffff;--s-hover-bg:#2f3f4e;--picto-bg:#3c4752;--picto-ink:#DDE6ED;--site-bg:#1b2530;--site-line:#313b45;--dept:#9DB2BF;--chip:#353f4a;--chip-ink:#eef2f6;--avatar:#515e69;--avatar-ink:#ffffff;--fac-avatar:#324352;--vac-avatar:#30353c;--card:#1d252f;--card-line:#2e3842;--fac-bg:#1a232e;--fac-line:#253240;--hit-bg:#515e69;--hit-ink:#ffffff;--tel-line:#3c4752;--foot:#6d757e;--modal:#1d252f;--field:#0d1218;--note-code:#27303a;--navy:#9DB2BF;--navy2:#9DB2BF;--toast:#192432;color-scheme:dark} }
+:root[data-theme="dark"][data-tone="beige"]{--paper:#14110f;--ink:#f9f2e9;--sub:#a6988a;--line:#3a342e;--accent:#C8B6A6;--accent-dim:#4b4138;--tb-bg:linear-gradient(180deg,#433a31,#383029);--tb-ink:#f9f2e9;--tb-sub:#b1a293;--tb-shadow:0 8px 22px -14px rgba(0,0,0,.7);--logo:#F1DEC9;--tb-field:#13100e;--tb-field-line:#463f38;--tb-field-ink:#fbf5ef;--tb-ph:#867a6e;--tb-btn:#3d352d;--tb-btn-line:#463f38;--tb-btn-ink:#f8eee4;--tb-btn-hover:#4b4137;--tb-on:#F1DEC9;--tb-on-ink:#29241f;--tb-hint-b:#F1DEC9;--acc-btn:#C8B6A6;--acc-btn-line:#C8B6A6;--acc-btn-ink:#29241f;--sum-bg:#443b33;--sum-ink:#f9f2e9;--sum-sub:#a6988a;--s-info:#c6b6a5;--s-info-hover:#ffffff;--s-hover-bg:#594d43;--picto-bg:#4f4740;--picto-ink:#F1DEC9;--site-bg:#2e2823;--site-line:#413a34;--dept:#C8B6A6;--chip:#463f38;--chip-ink:#f8eee4;--avatar:#695f56;--avatar-ink:#ffffff;--fac-avatar:#605448;--vac-avatar:#363331;--card:#292420;--card-line:#3e3731;--fac-bg:#2b2620;--fac-line:#443b33;--hit-bg:#695f56;--hit-ink:#ffffff;--tel-line:#4f4740;--foot:#7b7165;--modal:#292420;--field:#13100e;--note-code:#352f2a;--navy:#C8B6A6;--navy2:#C8B6A6;--toast:#433a31;color-scheme:dark}
+@media (prefers-color-scheme: dark){ :root[data-theme="system"][data-tone="beige"]{--paper:#14110f;--ink:#f9f2e9;--sub:#a6988a;--line:#3a342e;--accent:#C8B6A6;--accent-dim:#4b4138;--tb-bg:linear-gradient(180deg,#433a31,#383029);--tb-ink:#f9f2e9;--tb-sub:#b1a293;--tb-shadow:0 8px 22px -14px rgba(0,0,0,.7);--logo:#F1DEC9;--tb-field:#13100e;--tb-field-line:#463f38;--tb-field-ink:#fbf5ef;--tb-ph:#867a6e;--tb-btn:#3d352d;--tb-btn-line:#463f38;--tb-btn-ink:#f8eee4;--tb-btn-hover:#4b4137;--tb-on:#F1DEC9;--tb-on-ink:#29241f;--tb-hint-b:#F1DEC9;--acc-btn:#C8B6A6;--acc-btn-line:#C8B6A6;--acc-btn-ink:#29241f;--sum-bg:#443b33;--sum-ink:#f9f2e9;--sum-sub:#a6988a;--s-info:#c6b6a5;--s-info-hover:#ffffff;--s-hover-bg:#594d43;--picto-bg:#4f4740;--picto-ink:#F1DEC9;--site-bg:#2e2823;--site-line:#413a34;--dept:#C8B6A6;--chip:#463f38;--chip-ink:#f8eee4;--avatar:#695f56;--avatar-ink:#ffffff;--fac-avatar:#605448;--vac-avatar:#363331;--card:#292420;--card-line:#3e3731;--fac-bg:#2b2620;--fac-line:#443b33;--hit-bg:#695f56;--hit-ink:#ffffff;--tel-line:#4f4740;--foot:#7b7165;--modal:#292420;--field:#13100e;--note-code:#352f2a;--navy:#C8B6A6;--navy2:#C8B6A6;--toast:#433a31;color-scheme:dark} }
+:root[data-theme="dark"][data-tone="green"]{--paper:#0f140e;--ink:#f8f9ef;--sub:#a1a691;--line:#2d3828;--accent:#9DC08B;--accent-dim:#2f462f;--tb-bg:linear-gradient(180deg,#232d20,#1f281c);--tb-ink:#f8f9ef;--tb-sub:#acb09b;--tb-shadow:0 8px 22px -14px rgba(0,0,0,.7);--logo:#EDF1D6;--tb-field:#0e120d;--tb-field-line:#364430;--tb-field-ink:#fafbf3;--tb-ph:#808674;--tb-btn:#212a1e;--tb-btn-line:#364430;--tb-btn-ink:#f6f8ea;--tb-btn-hover:#263123;--tb-on:#EDF1D6;--tb-on-ink:#1f281d;--tb-hint-b:#EDF1D6;--acc-btn:#9DC08B;--acc-btn-line:#9DC08B;--acc-btn-ink:#1f281d;--sum-bg:#2b402b;--sum-ink:#f8f9ef;--sum-sub:#a1a691;--s-info:#c2c6af;--s-info-hover:#ffffff;--s-hover-bg:#365338;--picto-bg:#3d4c36;--picto-ink:#EDF1D6;--site-bg:#1f2c1e;--site-line:#323f2d;--dept:#9DC08B;--chip:#364430;--chip-ink:#f6f8ea;--avatar:#526548;--avatar-ink:#ffffff;--fac-avatar:#3a5a3c;--vac-avatar:#313630;--card:#1f271c;--card-line:#2f3b2a;--fac-bg:#1d291c;--fac-line:#2b402b;--hit-bg:#526548;--hit-ink:#ffffff;--tel-line:#3d4c36;--foot:#767b6a;--modal:#1f271c;--field:#0e120d;--note-code:#293324;--navy:#9DC08B;--navy2:#9DC08B;--toast:#232d20;color-scheme:dark}
+@media (prefers-color-scheme: dark){ :root[data-theme="system"][data-tone="green"]{--paper:#0f140e;--ink:#f8f9ef;--sub:#a1a691;--line:#2d3828;--accent:#9DC08B;--accent-dim:#2f462f;--tb-bg:linear-gradient(180deg,#232d20,#1f281c);--tb-ink:#f8f9ef;--tb-sub:#acb09b;--tb-shadow:0 8px 22px -14px rgba(0,0,0,.7);--logo:#EDF1D6;--tb-field:#0e120d;--tb-field-line:#364430;--tb-field-ink:#fafbf3;--tb-ph:#808674;--tb-btn:#212a1e;--tb-btn-line:#364430;--tb-btn-ink:#f6f8ea;--tb-btn-hover:#263123;--tb-on:#EDF1D6;--tb-on-ink:#1f281d;--tb-hint-b:#EDF1D6;--acc-btn:#9DC08B;--acc-btn-line:#9DC08B;--acc-btn-ink:#1f281d;--sum-bg:#2b402b;--sum-ink:#f8f9ef;--sum-sub:#a1a691;--s-info:#c2c6af;--s-info-hover:#ffffff;--s-hover-bg:#365338;--picto-bg:#3d4c36;--picto-ink:#EDF1D6;--site-bg:#1f2c1e;--site-line:#323f2d;--dept:#9DC08B;--chip:#364430;--chip-ink:#f6f8ea;--avatar:#526548;--avatar-ink:#ffffff;--fac-avatar:#3a5a3c;--vac-avatar:#313630;--card:#1f271c;--card-line:#2f3b2a;--fac-bg:#1d291c;--fac-line:#2b402b;--hit-bg:#526548;--hit-ink:#ffffff;--tel-line:#3d4c36;--foot:#767b6a;--modal:#1f271c;--field:#0e120d;--note-code:#293324;--navy:#9DC08B;--navy2:#9DC08B;--toast:#232d20;color-scheme:dark} }
+.toast a{color:#ffffff;text-decoration:underline;}
+/* 모든 글꼴: Noto Sans KR */
+:root{--sans:'Noto Sans KR', sans-serif; --mono:'Noto Sans KR', sans-serif;}
+html, body, body *:not(svg):not(svg *){font-family:'Noto Sans KR', sans-serif !important;}
+/* 로고: bestuhl 의 b 한 글자 (70% 크기 · 제목과 간격 1.5배) */
+.topbar h1{gap:10.5px;}
+.blogo-b{display:block;flex:none;height:.945em;width:auto;color:var(--logo);}
+.topbar h1 .h1t{align-self:baseline;}
+.title-left{align-items:baseline;}
+/* 주소 밑줄 없음 */
+.s-addr span{text-decoration:none;}
+/* 기준일 안내: DB 업로드 버튼 아래 */
+.tr-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
+.as-of{font-size:11px;color:var(--tb-sub);white-space:nowrap;}
+@media (max-width:640px){ .tr-right{align-items:flex-start;} }
+/* 사업소 픽토그램 */
+.s-ico.picto{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:var(--picto-bg);color:var(--picto-ink);font-size:0;}
+.s-ico.picto svg{width:17px;height:17px;}
+/* 색상 선택 (Color Hunt 팔레트 견본) */
+.tone-seg button{padding:3px 5px;}
+.tone-seg .sw{display:block;width:15px;height:15px;border-radius:4px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15);
+  background:linear-gradient(180deg,var(--a) 0 25%,var(--b) 25% 50%,var(--c) 50% 75%,var(--d) 75% 100%);}
+.tone-seg button.on .sw{box-shadow:0 0 0 2px var(--tb-btn),0 0 0 3.5px var(--tb-ink);}
+
+/* 단계별 색: 사업소 줄(2단계) · 부서 영역(3단계) · 직원 카드(4단계) */
+details.site{background:var(--site-bg);border-color:var(--site-line);}
+details.site summary{background:var(--sum-bg);color:var(--sum-ink);}
+details.site summary .count,details.site summary .arrow{color:var(--sum-sub);}
+.site-addr{color:var(--sub);}
+.cards .card .nums{border-top-color:var(--card-line);}
+
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <div class="title-row">
-  <div class="title-left"><h1><span class="blogo" role="img" aria-label="BESTUHL"></span>Bestuhl Addressbook</h1><span class="ver" id="verInfo"></span>
+  <div class="title-left"><h1><svg class="blogo-b" viewBox="6.6 5.6 19.8 24.2" role="img" aria-label="bestuhl"><path d="M9.50 6.00L9.50 12.85 Q9.50 14.85 11.50 14.85L22.90 14.85 Q24.90 14.85 24.90 16.85L24.90 25.90 Q24.90 27.90 22.90 27.90L8.00 27.90" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linejoin="round"/></svg><span class="h1t">Bestuhl Addressbook</span></h1><span class="ver" id="verInfo"></span>
     <span class="view-ctl">
       <span class="seg" id="zoomSeg" role="group" aria-label="보기 비율"><span class="seg-label" data-icon="zoom"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"></circle><path d="M15 15l5 5M10.5 8v5M8 10.5h5"></path></svg>보기</span><button type="button" data-z="1" class="">100%</button><button type="button" data-z="1.2">120%</button><button type="button" data-z="1.5">150%</button></span>
       <span class="seg" id="themeSeg" role="group" aria-label="화면 테마"><button type="button" data-t="light" data-icon="sun" title="밝은 화면"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"></path></svg>라이트</button><button type="button" data-t="dark" data-icon="moon" title="어두운 화면"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg>다크</button><button type="button" data-t="system" data-icon="monitor" title="기기 설정을 따름" class=""><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12" rx="1.5"></rect><path d="M8.5 20h7M12 16.5V20"></path></svg>시스템</button></span>
+      <span class="seg tone-seg" id="toneSeg" role="group" aria-label="테마 색상"><span class="seg-label"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2 0-1.4-1.2-1.6-1.2-2.8 0-1 .8-1.7 1.9-1.7H17a4 4 0 0 0 4-4C21 6.4 17 3 12 3z"/><circle cx="7.5" cy="11.5" r="1"/><circle cx="9.5" cy="7.3" r="1"/><circle cx="14.5" cy="7.3" r="1"/></svg>색상</span><button type="button" data-tone="mint" title="민트" aria-label="민트"><span class="sw" style="--a:#E3FDFD;--b:#CBF1F5;--c:#A6E3E9;--d:#71C9CE"></span></button><button type="button" data-tone="blue" title="블루" aria-label="블루"><span class="sw" style="--a:#F9F7F7;--b:#DBE2EF;--c:#3F72AF;--d:#112D4E"></span></button><button type="button" data-tone="pink" title="핑크" aria-label="핑크"><span class="sw" style="--a:#FFF5E4;--b:#FFE3E1;--c:#FFD1D1;--d:#FF9494"></span></button><button type="button" data-tone="slate" title="슬레이트" aria-label="슬레이트"><span class="sw" style="--a:#27374D;--b:#526D82;--c:#9DB2BF;--d:#DDE6ED"></span></button><button type="button" data-tone="beige" title="베이지" aria-label="베이지"><span class="sw" style="--a:#8D7B68;--b:#A4907C;--c:#C8B6A6;--d:#F1DEC9"></span></button><button type="button" data-tone="green" title="그린" aria-label="그린"><span class="sw" style="--a:#EDF1D6;--b:#9DC08B;--c:#609966;--d:#40513B"></span></button></span>
     </span></div>
-  <div class="admin-bar" id="adminBar">
+  <div class="tr-right"><div class="admin-bar" id="adminBar">
     <button class="abtn accent" id="btnInstall" data-icon="download" hidden title="이 기기에 앱으로 설치">앱 설치</button>
     <span class="db-info" id="dbInfo"></span>
     <button class="abtn admin-only" id="btnUpload" data-icon="upload" title="주요연락처 엑셀(.xlsx) 파일로 전화번호부 갱신"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4M7.5 8.5 12 4l4.5 4.5"></path><path d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"></path></svg>DB 업로드</button>
     <input type="file" id="xlsxInput" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden="" style="">
   </div>
+  <div class="as-of" id="asOf"></div></div>
   </div>
   <div class="search-wrap">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -536,7 +589,7 @@ body{font-variant-numeric:tabular-nums;}
    (외부 라이브러리 없이 브라우저 내장 기능만 사용: 오프라인 동작)
    ================================================================ */
 /* 앱(화면·기능) 버전 — 화면·기능이 바뀌는 배포 때 주/부 번호를 올림 */
-const APP_VERSION = '1.1.0';
+const APP_VERSION = '1.2.0';
 
 /* ---------- DB 로딩 (data.enc.json, 아래 boot() 참고) ---------- */
 function setDB(db, from){
@@ -547,7 +600,9 @@ function renderFooter(){
   const f = document.getElementById('footer');
   if(!f) return;
   const m = DATA.meta || {};
-  f.innerHTML = `베스툴 주요연락처 · ${escapeHtml(m.asOf||'')} 기준 · 총 ${records.length}명/라인<br>내 자리의 시작 베스툴`;
+  f.innerHTML = '내 자리의 시작 베스툴';
+  const a = document.getElementById('asOf');
+  if(a) a.textContent = `베스툴 주요연락처 · ${m.asOf||''} 기준 · 총 ${records.length}명/라인`;
 }
 /* 버전 규칙: v주.부.수정 (예: v1.0.1)
    - DB 업로드(적용)할 때마다 수정번호 +1 (99 다음은 부번호 +1)
@@ -1092,25 +1147,40 @@ const ICONS = {
 };
 function ICON(name){ return `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]||''}</svg>`; }
 
-/* ---------- 사업소 대표 아이콘 (지역 특산물·관광지) ----------
+/* ---------- 사업소 대표 아이콘 (지역 특산물·관광지 픽토그램 — PICTO 이름) ----------
    사업소 이름에 지역명이 들어 있으면 해당 아이콘을 씁니다. 새 사업소는 여기에 한 줄 추가하세요. */
 const SITE_ICONS = [
-  {key:'대구', icon:'🍎', desc:'대구 사과'},
-  {key:'인천', icon:'🌉', desc:'인천대교'},
-  {key:'서울', icon:'🗼', desc:'남산서울타워'},
-  {key:'파주', icon:'🎨', desc:'헤이리 예술마을'},
-  {key:'용인', icon:'🎢', desc:'에버랜드'},
-  {key:'대전', icon:'🚀', desc:'엑스포 한빛탑 · 과학도시'},
-  {key:'부산', icon:'🌊', desc:'해운대 바다'},
-  {key:'광주', icon:'🍲', desc:'광주 오리탕'},
-  {key:'울산', icon:'🐋', desc:'장생포 고래'},
-  {key:'수원', icon:'🏯', desc:'수원 화성'},
-  {key:'제주', icon:'🍊', desc:'제주 감귤'},
+  {key:'대구', icon:'apple', desc:'대구 사과'},
+  {key:'인천', icon:'bridge', desc:'인천대교'},
+  {key:'서울', icon:'tower', desc:'남산서울타워'},
+  {key:'파주', icon:'palette', desc:'헤이리 예술마을'},
+  {key:'용인', icon:'wheel', desc:'에버랜드'},
+  {key:'대전', icon:'rocket', desc:'엑스포 한빛탑 · 과학도시'},
+  {key:'부산', icon:'wave', desc:'해운대 바다'},
+  {key:'광주', icon:'pot', desc:'광주 오리탕'},
+  {key:'울산', icon:'whale', desc:'장생포 고래'},
+  {key:'수원', icon:'fortress', desc:'수원 화성'},
+  {key:'제주', icon:'orange', desc:'제주 감귤'},
 ];
+const PICTO = {
+  apple:'<path d="M12 7.6c-1.6-1.2-4.2-1.3-5.6.3-1.7 1.9-1.2 5.6.5 8.3 1.3 2 2.7 3.3 4 2.6.6-.3.9-.4 1.1-.4s.5.1 1.1.4c1.3.7 2.7-.6 4-2.6 1.7-2.7 2.2-6.4.5-8.3-1.4-1.6-4-1.5-5.6-.3z"/><path d="M12 7.6V4.6"/><path d="M12.4 5.4c.7-1.5 2.2-2.3 3.9-2.1-.4 1.6-1.8 2.5-3.5 2.4"/>',
+  bridge:'<path d="M2 16.5h20"/><path d="M8 5v14M16 5v14"/><path d="M8 6.5 3.5 16.5M8 6.5l4 10M16 6.5l-4 10M16 6.5l4.5 10"/>',
+  tower:'<path d="M12 2v3.5"/><rect x="8.5" y="5.5" width="7" height="3.2" rx="1.2"/><path d="M10.8 8.7 10 18.5M13.2 8.7l.8 9.8"/><path d="M3 21.5c2.5-2.6 5.5-3.5 9-3.5s6.5.9 9 3.5"/>',
+  palette:'<path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2 0-1.4-1.2-1.6-1.2-2.8 0-1 .8-1.7 1.9-1.7H17a4 4 0 0 0 4-4C21 6.4 17 3 12 3z"/><circle cx="7.5" cy="11.5" r="1"/><circle cx="9.5" cy="7.3" r="1"/><circle cx="14.5" cy="7.3" r="1"/>',
+  wheel:'<circle cx="12" cy="9.5" r="6.5"/><path d="M12 3v13M5.5 9.5h13"/><circle cx="12" cy="9.5" r="1.2"/><path d="M8.5 21 12 11l3.5 10M7 21h10"/>',
+  rocket:'<path d="M12 2.5c3 2 4.5 5.5 4.5 9.5l-1.5 3h-6L7.5 12c0-4 1.5-7.5 4.5-9.5z"/><circle cx="12" cy="9" r="1.6"/><path d="M7.5 12 5 15v3l4-1.5M16.5 12l2.5 3v3l-4-1.5"/><path d="M10.5 18.5 12 21l1.5-2.5"/>',
+  wave:'<path d="M2 7.5c1.7 0 1.7-1.5 3.3-1.5S7 7.5 8.7 7.5s1.7-1.5 3.3-1.5S13.7 7.5 15.3 7.5 17 6.0 18.7 6.0 20.3 7.5 22 7.5"/><path d="M2 12.5c1.7 0 1.7-1.5 3.3-1.5S7 12.5 8.7 12.5s1.7-1.5 3.3-1.5S13.7 12.5 15.3 12.5 17 11.0 18.7 11.0 20.3 12.5 22 12.5"/><path d="M2 17.5c1.7 0 1.7-1.5 3.3-1.5S7 17.5 8.7 17.5s1.7-1.5 3.3-1.5S13.7 17.5 15.3 17.5 17 16.0 18.7 16.0 20.3 17.5 22 17.5"/>',
+  pot:'<path d="M3.5 11h17c0 4.5-3.8 8-8.5 8s-8.5-3.5-8.5-8z"/><path d="M9 21h6"/><path d="M9 3.5c-1 1 1 2 0 3.5M12 3c-1 1 1 2 0 3.5M15 3.5c-1 1 1 2 0 3.5"/>',
+  whale:'<path d="M3 12.5c0 3.9 3.6 6.5 8.5 6.5 4.6 0 7.4-2.6 8.4-6.2l2.1-3.3-3.6.9C17.3 7.5 14.8 6 11.5 6 6.6 6 3 8.6 3 12.5z"/><circle cx="7.5" cy="11.5" r=".6"/><path d="M11 5.5V3.5M11 3.5c0-1 .8-1.5 1.8-1.5M11 3.5c0-1-.8-1.5-1.8-1.5"/>',
+  fortress:'<path d="M3 21V10h18v11M3 10l2-3h14l2 3M5 7V5h14v2"/><path d="M9.5 21v-4a2.5 2.5 0 0 1 5 0v4"/>',
+  orange:'<circle cx="12" cy="13.5" r="7"/><path d="M12 6.5V4.5"/><path d="M12.3 5.6c.6-1.6 2.1-2.5 3.9-2.4-.4 1.6-1.9 2.6-3.6 2.5"/>',
+  building:'<rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1M10.5 21v-3h3v3"/>'
+};
+function PICTO_SVG(n){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${PICTO[n]||PICTO.building}</svg>`; }
 function siteIcon(site){
   const s = SITE_ICONS.find(x => (site||'').indexOf(x.key) >= 0);
-  return s ? `<span class="s-ico" title="${escapeHtml(s.desc)}" role="img" aria-label="${escapeHtml(s.desc)}">${s.icon}</span>`
-           : `<span class="s-ico" aria-hidden="true">🏢</span>`;
+  return s ? `<span class="s-ico picto" title="${escapeHtml(s.desc)}" role="img" aria-label="${escapeHtml(s.desc)}">${PICTO_SVG(s.icon)}</span>`
+           : `<span class="s-ico picto" aria-hidden="true">${PICTO_SVG('building')}</span>`;
 }
 
 /* ---------- 화면 테마 (라이트 · 다크 · 시스템) — 이 기기에만 기억 ---------- */
@@ -1122,6 +1192,16 @@ function applyTheme(mode){
   try{ localStorage.setItem(THEME_KEY, mode); }catch(e){}
 }
 (function(){ let m = 'system'; try{ m = localStorage.getItem(THEME_KEY) || 'system'; }catch(e){} document.documentElement.setAttribute('data-theme', m); })();
+/* ---------- 색상 테마 (Color Hunt 팔레트 6종) — 이 기기에만 기억 ---------- */
+const TONE_KEY = 'bestuhl_addressbook_tone';
+const TONES = ['mint','blue','pink','slate','beige','green'];
+function applyTone(t){
+  t = TONES.indexOf(t) >= 0 ? t : 'blue';
+  document.documentElement.setAttribute('data-tone', t);
+  document.querySelectorAll('#toneSeg button').forEach(b => b.classList.toggle('on', b.dataset.tone === t));
+  try{ localStorage.setItem(TONE_KEY, t); }catch(e){}
+}
+(function(){ let t = 'blue'; try{ t = localStorage.getItem(TONE_KEY) || 'blue'; }catch(e){} document.documentElement.setAttribute('data-tone', t); })();
 
 /* ---------- 사업소 주소·대표번호 (사업소 제목줄에 표시) ---------- */
 async function copyText(text){
@@ -1178,6 +1258,10 @@ document.addEventListener('DOMContentLoaded', () => {
   applyTheme(m);
   const ts = document.getElementById('themeSeg');
   if(ts) ts.addEventListener('click', e => { const b = e.target.closest('button[data-t]'); if(b) applyTheme(b.dataset.t); });
+  let tn = 'blue'; try{ tn = localStorage.getItem(TONE_KEY) || 'blue'; }catch(e){}
+  applyTone(tn);
+  const tg = document.getElementById('toneSeg');
+  if(tg) tg.addEventListener('click', e => { const b = e.target.closest('button[data-tone]'); if(b) applyTone(b.dataset.tone); });
   // data-icon 이 붙은 정적 버튼에 아이콘 넣기 (이미 있으면 건너뜀)
   document.querySelectorAll('[data-icon]').forEach(el => { if(!el.querySelector('.ico')) el.insertAdjacentHTML('afterbegin', ICON(el.dataset.icon)); });
   const seg = document.getElementById('zoomSeg');
